@@ -317,11 +317,11 @@
         <div class="card-header">
           <div class="card-title"><iconify-icon icon="mdi:ticket-outline"></iconify-icon> 单人兑换码活动列表</div>
           <div class="btn-group">
-            <button class="btn btn-default" id="btn-batch-generate" disabled onclick="openBatchGenerateModal()">
+            <button class="btn btn-default" id="btn-batch-generate" data-role-ops disabled onclick="openBatchGenerateModal()">
               <iconify-icon icon="mdi:send-outline"></iconify-icon> 批量生成审批
               <span id="batch-select-count" style="display:none;background:#fff;color:var(--primary);border-radius:8px;padding:0 6px;font-size:11px;font-weight:700;margin-left:2px">0</span>
             </button>
-            <button class="btn btn-primary" onclick="openModal('modal-create')">
+            <button class="btn btn-primary" data-role-ops onclick="openModal('modal-create')">
               <iconify-icon icon="mdi:plus"></iconify-icon> 新增活动
             </button>
           </div>
@@ -364,7 +364,7 @@
           <table>
             <thead>
               <tr>
-                <th><input type="checkbox" id="chk-all-acts" onchange="toggleAllActCheckboxes(this)" /></th>
+                <th data-role-ops><input type="checkbox" id="chk-all-acts" onchange="toggleAllActCheckboxes(this)" /></th>
                 <th>活动 ID</th><th>活动标题</th><th>用途</th>
                 <th>单码价值</th><th>已生成/审批中</th><th>有效期</th><th>活动状态</th><th>创建人</th><th>操作</th>
               </tr>
@@ -474,7 +474,7 @@
         <div class="card-header">
           <div class="card-title"><iconify-icon icon="mdi:ticket-percent-outline"></iconify-icon> 复用兑换码活动列表</div>
           <div class="btn-group">
-            <button class="btn btn-primary" onclick="openModal('modal-reusable-create')">
+            <button class="btn btn-primary" data-role-ops onclick="openModal('modal-reusable-create')">
               <iconify-icon icon="mdi:plus"></iconify-icon> 新增复用码
             </button>
           </div>
@@ -520,10 +520,10 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:6px">
                     <button class="btn-text" onclick="openDrawer('reusable-detail')">查看日志</button>
-                    <span style="color:var(--border)">|</span>
-                    <button class="btn-text" onclick="openModal('modal-reusable-edit')">修改</button>
-                    <span style="color:var(--border)">|</span>
-                    <button class="btn-text" onclick="openModal('modal-reusable-copy')">复制</button>
+                    <span style="color:var(--border)" data-role-ops>|</span>
+                    <button class="btn-text" data-role-ops onclick="openModal('modal-reusable-edit')">修改</button>
+                    <span style="color:var(--border)" data-role-ops>|</span>
+                    <button class="btn-text" data-role-ops onclick="openModal('modal-reusable-copy')">复制</button>
                   </div>
                 </td>
               </tr>
@@ -542,10 +542,10 @@
                 <td>
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
                     <button class="btn-text" onclick="openDrawer('reusable-detail')">查看日志</button>
-                    <span style="color:var(--border)">|</span>
-                    <button class="btn-text" onclick="openModal('modal-reusable-edit')">修改</button>
-                    <span style="color:var(--border)">|</span>
-                    <button class="btn-text" onclick="openModal('modal-reusable-copy')">复制</button>
+                    <span style="color:var(--border)" data-role-ops>|</span>
+                    <button class="btn-text" data-role-ops onclick="openModal('modal-reusable-edit')">修改</button>
+                    <span style="color:var(--border)" data-role-ops>|</span>
+                    <button class="btn-text" data-role-ops onclick="openModal('modal-reusable-copy')">复制</button>
                   </div>
                 </td>
               </tr>
@@ -749,13 +749,13 @@
         <div class="card-header">
           <div class="card-title"><iconify-icon icon="mdi:package-variant-closed"></iconify-icon> 道具管理</div>
           <div class="btn-group">
-            <button class="btn btn-default" onclick="toast('请选择 Excel 文件批量上传','info')">
+            <button class="btn btn-default" data-role-ops onclick="toast('请选择 Excel 文件批量上传','info')">
               <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传
             </button>
-            <button class="btn btn-danger" onclick="toast('请先勾选要删除的道具','warning')">
+            <button class="btn btn-danger" data-role-ops onclick="toast('请先勾选要删除的道具','warning')">
               <iconify-icon icon="mdi:delete-outline"></iconify-icon> 批量删除
             </button>
-            <button class="btn btn-primary" onclick="openModal('modal-item-add')">
+            <button class="btn btn-primary" data-role-ops onclick="openModal('modal-item-add')">
               <iconify-icon icon="mdi:plus"></iconify-icon> 新增道具
             </button>
           </div>
@@ -787,8 +787,8 @@
                 <td class="td-mono">99,999</td>
                 <td class="td-mono"><strong>¥0.01</strong></td>
                 <td>
-                  <button class="btn-text" onclick="toast('进入修改模式','info')">修改</button>
-                  <button class="btn-text danger" onclick="toast('请确认是否删除该道具？','warning')">删除</button>
+                  <button class="btn-text" data-role-ops onclick="toast('进入修改模式','info')">修改</button>
+                  <button class="btn-text danger" data-role-ops onclick="toast('请确认是否删除该道具？','warning')">删除</button>
                 </td>
               </tr>
               <tr>
@@ -798,8 +798,8 @@
                 <td class="td-mono">9,999</td>
                 <td class="td-mono"><strong>¥0.10</strong></td>
                 <td>
-                  <button class="btn-text" onclick="toast('进入修改模式','info')">修改</button>
-                  <button class="btn-text danger" onclick="toast('请确认是否删除该道具？','warning')">删除</button>
+                  <button class="btn-text" data-role-ops onclick="toast('进入修改模式','info')">修改</button>
+                  <button class="btn-text danger" data-role-ops onclick="toast('请确认是否删除该道具？','warning')">删除</button>
                 </td>
               </tr>
               <tr>
@@ -809,8 +809,8 @@
                 <td class="td-mono">99</td>
                 <td class="td-mono"><strong>¥2.00</strong></td>
                 <td>
-                  <button class="btn-text" onclick="toast('进入修改模式','info')">修改</button>
-                  <button class="btn-text danger" onclick="toast('请确认是否删除该道具？','warning')">删除</button>
+                  <button class="btn-text" data-role-ops onclick="toast('进入修改模式','info')">修改</button>
+                  <button class="btn-text danger" data-role-ops onclick="toast('请确认是否删除该道具？','warning')">删除</button>
                 </td>
               </tr>
               <tr>
@@ -820,8 +820,8 @@
                 <td class="td-mono">1</td>
                 <td class="td-mono"><strong>¥50.00</strong></td>
                 <td>
-                  <button class="btn-text" onclick="toast('进入修改模式','info')">修改</button>
-                  <button class="btn-text danger" onclick="toast('请确认是否删除该道具？','warning')">删除</button>
+                  <button class="btn-text" data-role-ops onclick="toast('进入修改模式','info')">修改</button>
+                  <button class="btn-text danger" data-role-ops onclick="toast('请确认是否删除该道具？','warning')">删除</button>
                 </td>
               </tr>
             </tbody>
@@ -2340,6 +2340,9 @@
     calcGen();
   }
 
+  // ===== 角色权限 =====
+  var _currentRole = 'ops'; // 'ops' | 'cs'
+
   // ===== 单人兑换码活动列表：数据与筛选、新增联动 =====
   var actList = [
     { id: 'ACT-2026-001', title: '3月登录礼包', purposeLabel: '免费活动 · 营销活动', unitValue: 20, generated: '5,000 / 0', validPeriod: '03/01–03/31', status: '待开始', creator: 'Jay.zhu', purpose: '免费活动', editState: 'approved' },
@@ -2360,11 +2363,16 @@
     var tbody = document.getElementById('codes-act-tbody');
     var pageInfo = document.getElementById('codes-page-info');
     if (!tbody) return;
+    var isCs = (_currentRole === 'cs');
     var html = '';
     list.forEach(function(act) {
       var statusHtml = statusBadgeHtml(act.status);
+      var opHtml = '<button class="btn-text" onclick="openDrawer(\'detail\')">查看</button>';
+      if (!isCs) {
+        opHtml += '<span style="color:var(--border)">|</span><button class="btn-text" onclick="openModal(\'modal-codes-view\')">查看码值</button><span style="color:var(--border)">|</span><button class="btn-text" onclick="openModal(\'modal-generate\')">生成</button><span style="color:var(--border)">|</span><button class="btn-text" onclick="openModal(\'modal-edit\',\'' + act.editState + '\')">修改</button><span style="color:var(--border)">|</span><button class="btn-text" onclick="openModal(\'modal-single-copy\')">复制</button>';
+      }
       html += '<tr>' +
-        '<td><input type="checkbox" class="act-chk" data-id="' + act.id + '" data-name="' + act.title + '" data-unit-price="' + act.unitValue + '" data-history-val="0" data-game="幻境大陆" data-purpose="' + act.purpose + '" onchange="onActCheckChange()" /></td>' +
+        '<td data-role-ops><input type="checkbox" class="act-chk" data-id="' + act.id + '" data-name="' + act.title + '" data-unit-price="' + act.unitValue + '" data-history-val="0" data-game="幻境大陆" data-purpose="' + act.purpose + '" onchange="onActCheckChange()" /></td>' +
         '<td class="td-muted">' + act.id + '</td>' +
         '<td><strong>' + act.title + '</strong></td>' +
         '<td><span class="badge badge-blue">' + act.purposeLabel + '</span></td>' +
@@ -2373,12 +2381,7 @@
         '<td class="td-muted">' + act.validPeriod + '</td>' +
         '<td>' + statusHtml + '</td>' +
         '<td>' + act.creator + '</td>' +
-        '<td><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
-        '<button class="btn-text" onclick="openDrawer(\'detail\')">查看</button><span style="color:var(--border)">|</span>' +
-        '<button class="btn-text" onclick="openModal(\'modal-codes-view\')">查看码值</button><span style="color:var(--border)">|</span>' +
-        '<button class="btn-text" onclick="openModal(\'modal-generate\')">生成</button><span style="color:var(--border)">|</span>' +
-        '<button class="btn-text" onclick="openModal(\'modal-edit\',\'' + act.editState + '\')">修改</button><span style="color:var(--border)">|</span>' +
-        '<button class="btn-text" onclick="openModal(\'modal-single-copy\')">复制</button></div></td>' +
+        '<td><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' + opHtml + '</div></td>' +
         '</tr>';
     });
     tbody.innerHTML = html;
@@ -2714,20 +2717,35 @@
   }
 
   // ===== ROLE =====
-  function onRoleChange(val) {
+  function onRoleChange(val, silent) {
+    _currentRole = val;
     const isCs = val === 'cs';
-    toast(isCs ? '已切换为客服视图' : '已切换为运营视图', isCs ? 'warning' : 'info');
-    // 禁用/解禁操作列：仅运营可见
-    const opCells = document.querySelectorAll('.cs-single-op-cell');
-    const checkCol = document.getElementById('cs-single-check-col');
-    const opCol = document.getElementById('cs-single-op-col');
-    const show = !isCs;
-    if (checkCol) checkCol.style.display = show ? '' : 'none';
-    if (opCol) opCol.style.display = show ? '' : 'none';
-    opCells.forEach(el => el.style.display = show ? '' : 'none');
-    document.querySelectorAll('#cs-single input[type=checkbox]').forEach(el => {
-      el.closest('td') && (el.closest('td').style.display = show ? '' : 'none');
+    if (!silent) toast(isCs ? '已切换为客服视图' : '已切换为运营视图', isCs ? 'warning' : 'info');
+    document.querySelectorAll('[data-role-ops]').forEach(el => {
+      el.style.display = isCs ? 'none' : '';
     });
+    var checkCol = document.getElementById('cs-single-check-col');
+    if (checkCol) checkCol.style.display = isCs ? 'none' : '';
+    document.querySelectorAll('#cs-single tbody td:first-child').forEach(el => {
+      el.style.display = isCs ? 'none' : '';
+    });
+    if (typeof renderCodesActTable === 'function' && actList) {
+      var filtered = actList.filter(function(act) {
+        var keyword = (document.getElementById('filter-keyword') && document.getElementById('filter-keyword').value || '').trim().toLowerCase();
+        var creator = document.getElementById('filter-creator') ? document.getElementById('filter-creator').value : '';
+        var statusEl = document.getElementById('filter-status');
+        var purposeEl = document.getElementById('filter-purpose');
+        var status = statusEl ? statusEl.value : '';
+        var purpose = purposeEl ? purposeEl.value : '';
+        if (keyword && act.title.toLowerCase().indexOf(keyword) === -1 && act.id.toLowerCase().indexOf(keyword) === -1) return false;
+        if (creator === 'me' && act.creator !== 'Jay.zhu') return false;
+        if (creator && creator !== 'me' && act.creator !== creator) return false;
+        if (status && act.status !== status) return false;
+        if (purpose && act.purpose !== purpose) return false;
+        return true;
+      });
+      renderCodesActTable(filtered);
+    }
   }
 
   // ===== TOAST =====
@@ -2753,6 +2771,8 @@
 
   // 首屏渲染活动列表（脚本在 body 末尾执行时 DOM 已就绪）
   if (typeof renderCodesActTable === 'function' && actList) renderCodesActTable(actList);
+  var roleSelect = document.querySelector('select[onchange*="onRoleChange"]');
+  if (roleSelect) onRoleChange(roleSelect.value, true);
 </script>
 </body>
 </html>
