@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/", "destination": "/迅风兑换码-prototype.html" },
+    { "source": "/prototype", "destination": "/迅风兑换码-prototype.html" }
+  ]
+}
