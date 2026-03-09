@@ -1,5 +1,23 @@
 # 迅风兑换码 - 部署指南
 
+## GitHub Pages 在线访问（推荐，国内可访问）
+
+项目已配置 `index.html`，访问根路径会自动跳转到原型页面。
+
+### 启用步骤
+
+1. 打开 https://github.com/PPkapibala/duihuanma/settings/pages
+2. 在 **Source** 选择 **Deploy from a branch**
+3. **Branch** 选 `main`，**Folder** 选 `/ (root)`
+4. 点击 **Save**
+5. 等待 1–2 分钟部署完成
+
+### 访问地址
+
+**https://ppkapibala.github.io/duihuanma/**
+
+---
+
 ## 部署到 Git（推送到 GitHub）
 
 ### 前置条件
