@@ -119,6 +119,7 @@
     .badge-rejected { background: #fff2f0; color: #cf1322; } .badge-rejected .badge-dot { background: var(--error); }
     .badge-draft    { background: #f0f2f5; color: #4e5969; } .badge-draft .badge-dot    { background: var(--text-tertiary); }
     .badge-blue     { background: #e8f3ff; color: var(--primary); }
+    .badge-info     { background: #f0f9ff; color: #0958d9; } .badge-info .badge-dot { background: #0958d9; }
 
     /* ===== PAGINATION ===== */
     .table-footer { display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; border-top: 1px solid var(--border-light); }
@@ -377,13 +378,13 @@
         <div class="table-footer">
           <div class="page-info" id="codes-page-info">共 0 条，每页 10 条</div>
           <div class="page-btns">
-            <button class="page-btn"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
+            <button class="page-btn" onclick="toast('上一页','info')"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
             <button class="page-btn active">1</button>
             <button class="page-btn" onclick="toast('切换至第2页','info')">2</button>
             <button class="page-btn" onclick="toast('切换至第3页','info')">3</button>
-            <button class="page-btn">…</button>
+            <button class="page-btn" onclick="toast('更多页码…','info')">…</button>
             <button class="page-btn" onclick="toast('切换至第13页','info')">13</button>
-            <button class="page-btn"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
+            <button class="page-btn" onclick="toast('下一页','info')"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
           </div>
         </div>
       </div>
@@ -405,7 +406,7 @@
             <button class="btn btn-primary" onclick="toast('查询完成','info')">
               <iconify-icon icon="mdi:magnify"></iconify-icon> 查询
             </button>
-            <button class="btn btn-default">重置</button>
+            <button class="btn btn-default" onclick="toast('已重置筛选','info')">重置</button>
           </div>
           <div class="table-wrap">
             <table>
@@ -458,10 +459,10 @@
           <div class="table-footer">
             <div class="page-info">共 28 条，每页 10 条</div>
             <div class="page-btns">
-              <button class="page-btn"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
+              <button class="page-btn" onclick="toast('上一页','info')"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
               <button class="page-btn active">1</button>
               <button class="page-btn" onclick="toast('切换至第2页','info')">2</button>
-              <button class="page-btn"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
+              <button class="page-btn" onclick="toast('下一页','info')"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
             </div>
           </div>
         </div>
@@ -493,7 +494,7 @@
           <button class="btn btn-primary" onclick="toast('查询完成','info')">
             <iconify-icon icon="mdi:magnify"></iconify-icon> 查询
           </button>
-          <button class="btn btn-default">重置</button>
+          <button class="btn btn-default" onclick="toast('已重置筛选','info')">重置</button>
         </div>
         <div class="table-wrap">
           <table>
@@ -530,7 +531,7 @@
               <tr>
                 <td class="td-muted">RC-002</td>
                 <td><span class="badge badge-pending"><span class="badge-dot"></span>审批中</span></td>
-                <td><span class="badge badge-info" style="background:#f0f9ff;color:#0958d9"><span class="badge-dot" style="background:#0958d9"></span>未开始</span></td>
+                <td><span class="badge badge-info"><span class="badge-dot"></span>未开始</span></td>
                 <td>Tom.chen</td>
                 <td><strong>3月KOL合作码</strong></td>
                 <td style="font-size:12.5px">售卖 · KOL合作</td>
@@ -555,10 +556,10 @@
         <div class="table-footer">
           <div class="page-info">共 18 条，每页 10 条</div>
           <div class="page-btns">
-            <button class="page-btn"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
+            <button class="page-btn" onclick="toast('上一页','info')"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
             <button class="page-btn active">1</button>
             <button class="page-btn" onclick="toast('切换至第2页','info')">2</button>
-            <button class="page-btn"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
+            <button class="page-btn" onclick="toast('下一页','info')"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
           </div>
         </div>
       </div>
@@ -769,7 +770,7 @@
           <button class="btn btn-primary" onclick="toast('查询完成','info')">
             <iconify-icon icon="mdi:magnify"></iconify-icon> 查询
           </button>
-          <button class="btn btn-default">重置</button>
+          <button class="btn btn-default" onclick="toast('已重置筛选','info')">重置</button>
         </div>
         <div class="table-wrap">
           <table>
@@ -830,11 +831,11 @@
         <div class="table-footer">
           <div class="page-info">共 56 条，每页 10 条</div>
           <div class="page-btns">
-            <button class="page-btn"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
+            <button class="page-btn" onclick="toast('上一页','info')"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
             <button class="page-btn active">1</button>
             <button class="page-btn" onclick="toast('切换至第2页','info')">2</button>
             <button class="page-btn" onclick="toast('切换至第3页','info')">3</button>
-            <button class="page-btn"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
+            <button class="page-btn" onclick="toast('下一页','info')"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
           </div>
         </div>
       </div>
@@ -854,15 +855,15 @@
       <div class="form-grid-2">
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
-          <select class="form-control"><option selected>全部渠道</option><option>官方渠道</option><option>合作渠道</option></select>
+          <select class="form-control" id="create-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" />
+          <input class="form-control" type="datetime-local" id="create-start" />
         </div>
         <div class="form-group">
           <label class="form-label">结束时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" />
+          <input class="form-control" type="datetime-local" id="create-end" />
         </div>
         <div class="form-group">
           <label class="form-label">兑换上限（次/人）</label>
@@ -941,11 +942,11 @@
         <div class="gift-config-box">
           <div id="gift-rows">
             <div class="gift-config-row gift-row">
-              <select class="form-control" style="flex:1">
+              <select class="form-control gift-select" style="flex:1">
                 <option value="">选择道具</option>
-                <option>金币</option><option>钻石</option><option>经验药水·大</option><option>传说装备箱</option>
+                <option value="金币">金币</option><option value="钻石">钻石</option><option value="经验药水·大">经验药水·大</option><option value="传说装备箱">传说装备箱</option>
               </select>
-              <input type="number" class="form-control" style="width:80px" placeholder="数量" min="1" />
+              <input type="number" class="form-control gift-qty" style="width:80px" placeholder="数量" min="1" />
               <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
             </div>
           </div>
@@ -990,15 +991,15 @@
       <div class="form-grid-2">
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
-          <select class="form-control"><option selected>全部渠道</option><option>官方渠道</option><option>合作渠道</option></select>
+          <select class="form-control" id="copy-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-02-01T00:00" />
+          <input class="form-control" type="datetime-local" id="copy-start" value="2026-02-01T00:00" />
         </div>
         <div class="form-group">
           <label class="form-label">结束时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-02-28T23:59" />
+          <input class="form-control" type="datetime-local" id="copy-end" value="2026-02-28T23:59" />
         </div>
         <div class="form-group">
           <label class="form-label">兑换上限（次/人）</label>
@@ -1011,7 +1012,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">活动标题 <span class="req">*</span></label>
-        <input class="form-control" type="text" value="迅风2月留存活动（复制）" />
+        <input class="form-control" type="text" id="copy-title" value="迅风2月留存活动（复制）" />
       </div>
       <div class="form-group">
         <label class="form-label">单向排斥活动</label>
@@ -1030,8 +1031,9 @@
       </div>
       <div class="form-group">
         <label class="form-label">用途 <span class="req">*</span></label>
-        <select class="form-control">
-          <option>免费活动</option><option>创作者激励</option><option>售卖</option>
+        <select class="form-control" id="copy-purpose">
+          <option value="">请选择用途</option>
+          <option value="免费活动" selected>免费活动</option><option value="创作者激励">创作者激励</option><option value="售卖">售卖</option>
         </select>
       </div>
       <div class="form-group">
@@ -1039,12 +1041,12 @@
         <div class="gift-config-box">
           <div id="single-copy-gift-rows">
             <div class="gift-config-row gift-row">
-              <select class="form-control" style="flex:1"><option>金币</option><option>钻石</option><option>经验药水·大</option><option>传说装备箱</option></select>
+              <select class="form-control" style="flex:1"><option value="">选择道具</option><option value="金币" selected>金币</option><option value="钻石">钻石</option><option value="经验药水·大">经验药水·大</option><option value="传说装备箱">传说装备箱</option></select>
               <input type="number" class="form-control" style="width:80px" value="1000" min="1" />
               <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeSingleCopyGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
             </div>
             <div class="gift-config-row gift-row">
-              <select class="form-control" style="flex:1"><option>金币</option><option>钻石</option><option selected>经验药水·大</option><option>传说装备箱</option></select>
+              <select class="form-control" style="flex:1"><option value="">选择道具</option><option value="金币">金币</option><option value="钻石">钻石</option><option value="经验药水·大" selected>经验药水·大</option><option value="传说装备箱">传说装备箱</option></select>
               <input type="number" class="form-control" style="width:80px" value="5" min="1" />
               <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeSingleCopyGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
             </div>
@@ -1068,7 +1070,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-default" onclick="closeModal('modal-single-copy')">取消</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-single-copy');toast('活动创建成功，可进行生成申请','success')">
+      <button class="btn btn-primary" onclick="submitSingleCopy()">
         <iconify-icon icon="mdi:check"></iconify-icon> 确认创建
       </button>
     </div>
@@ -1160,19 +1162,19 @@
       <div class="form-grid-2">
         <div class="form-group" style="grid-column:1/-1">
           <label class="form-label">活动标题 <span class="req">*</span></label>
-          <input class="form-control" type="text" value="3月登录礼包" />
+          <input class="form-control" type="text" id="edit-title" value="3月登录礼包" />
         </div>
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
-          <select class="form-control"><option selected>全部渠道</option><option>官方渠道</option><option>合作渠道</option></select>
+          <select class="form-control" id="edit-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-03-01T00:00" />
+          <input class="form-control" type="datetime-local" id="edit-start" value="2026-03-01T00:00" />
         </div>
         <div class="form-group">
           <label class="form-label">结束时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-03-31T23:59" />
+          <input class="form-control" type="datetime-local" id="edit-end" value="2026-03-31T23:59" />
         </div>
         <div class="form-group">
           <label class="form-label">兑换上限（次/人）</label>
@@ -1215,7 +1217,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-default" onclick="closeModal('modal-edit')">取消</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-edit');toast('活动信息已更新','success')">
+      <button class="btn btn-primary" onclick="submitEditAct()">
         <iconify-icon icon="mdi:check"></iconify-icon> 保存修改
       </button>
     </div>
@@ -1232,32 +1234,32 @@
     <div class="modal-body">
       <div class="alert alert-info">
         <iconify-icon icon="mdi:information-outline"></iconify-icon>
-        <span>提交后立即进入 BPM 飞书审批，<strong>审批期间不可修改任何字段</strong>，请谨慎填写。</span>
+        <span>提交后立即进入 BPM 飞书审批，请谨慎填写。</span>
       </div>
       <div class="form-group">
         <label class="form-label">活动标题 <span class="req">*</span></label>
-        <input class="form-control" type="text" placeholder="请输入活动标题" />
+        <input class="form-control" type="text" id="reusable-create-title" placeholder="请输入活动标题" />
       </div>
       <div class="form-group">
         <label class="form-label">兑换码口令 <span class="req">*</span></label>
-        <input class="form-control" type="text" placeholder="用户输入此口令进行兑换，同游戏全局唯一" />
+        <input class="form-control" type="text" id="reusable-create-passcode" placeholder="用户输入此口令进行兑换，同游戏全局唯一" />
       </div>
       <div class="form-grid-2">
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
-          <select class="form-control"><option selected>全部渠道</option><option>官方渠道</option><option>合作渠道</option></select>
+          <select class="form-control" id="reusable-create-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" />
+          <input class="form-control" type="datetime-local" id="reusable-create-start" />
         </div>
         <div class="form-group">
           <label class="form-label">结束时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" />
+          <input class="form-control" type="datetime-local" id="reusable-create-end" />
         </div>
         <div class="form-group">
           <label class="form-label">可兑换次数上限</label>
-          <input class="form-control" type="number" min="1" placeholder="留空表示不限" />
+          <input class="form-control" type="number" id="reusable-create-max-usage" min="1" placeholder="留空表示不限" />
           <div class="form-hint">达到上限后任何人均无法兑换</div>
         </div>
       </div>
@@ -1291,9 +1293,9 @@
       </div>
       <div id="reusable-purpose-free" class="form-group" style="display:none">
         <label class="form-label">免费活动类型 <span class="req">*</span></label>
-        <select class="form-control">
+        <select class="form-control" id="reusable-purpose-free-sub">
           <option value="">请选择</option>
-          <option>营销活动</option><option>售后补偿</option><option>内部测试</option><option>商务合作</option>
+          <option value="营销活动">营销活动</option><option value="售后补偿">售后补偿</option><option value="内部测试">内部测试</option><option value="商务合作">商务合作</option>
         </select>
       </div>
       <div id="reusable-purpose-creator" class="form-group" style="display:none">
@@ -1302,11 +1304,11 @@
       </div>
       <div id="reusable-purpose-sale" class="form-group" style="display:none">
         <label class="form-label">售卖渠道 <span class="req">*</span></label>
-        <select class="form-control">
+        <select class="form-control" id="reusable-purpose-sale-channel">
           <option value="">请选择售卖渠道</option>
-          <option>fanbook 商城</option><option>微信商城</option>
-          <option>抖音商城 · 官方店</option><option>抖音商城 · 合作店</option>
-          <option>商务合作</option><option>KOL 合作</option>
+          <option value="fanbook">fanbook 商城</option><option value="wechat">微信商城</option>
+          <option value="douyin-official">抖音商城 · 官方店</option><option value="douyin-partner">抖音商城 · 合作店</option>
+          <option value="biz">商务合作</option><option value="kol">KOL 合作</option>
         </select>
       </div>
       <div class="form-group">
@@ -1316,7 +1318,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-default" onclick="closeModal('modal-reusable-create')">取消</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-reusable-create');toast('复用兑换码活动已提交飞书审批，请留意审批通知','success')">
+      <button class="btn btn-primary" id="reusable-create-submit" onclick="submitReusableCreate()">
         <iconify-icon icon="mdi:send-outline"></iconify-icon> 提交审批
       </button>
     </div>
@@ -1353,20 +1355,20 @@
       <!-- 可修改字段 -->
       <div class="form-group">
         <label class="form-label">活动标题 <span class="req">*</span></label>
-        <input class="form-control" type="text" value="春节直播专属" />
+        <input class="form-control" type="text" id="reusable-edit-title" value="春节直播专属" />
       </div>
       <div class="form-grid-2">
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
-          <select class="form-control"><option selected>全部渠道</option><option>官方渠道</option><option>合作渠道</option></select>
+          <select class="form-control" id="reusable-edit-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-02-01T00:00" />
+          <input class="form-control" type="datetime-local" id="reusable-edit-start" value="2026-02-01T00:00" />
         </div>
         <div class="form-group">
           <label class="form-label">结束时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-02-28T23:59" />
+          <input class="form-control" type="datetime-local" id="reusable-edit-end" value="2026-02-28T23:59" />
         </div>
       </div>
       <div class="form-group">
@@ -1376,7 +1378,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-default" onclick="closeModal('modal-reusable-edit')">取消</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-reusable-edit');toast('修改已保存','success')">
+      <button class="btn btn-primary" onclick="submitReusableEdit()">
         <iconify-icon icon="mdi:check"></iconify-icon> 保存修改
       </button>
     </div>
@@ -1393,33 +1395,33 @@
     <div class="modal-body">
       <div class="alert alert-info" style="margin-bottom:16px">
         <iconify-icon icon="mdi:information-outline"></iconify-icon>
-        <span>已复制活动配置（<strong>不含兑换码口令</strong>），请填写新口令后提交审批。提交后进入 BPM 飞书审批，审批期间不可修改，请谨慎填写。</span>
+        <span>已复制活动配置（<strong>不含兑换码口令</strong>），请填写新口令后提交审批。提交后进入 BPM 飞书审批，请谨慎填写。</span>
       </div>
       <div class="form-group">
         <label class="form-label">活动标题 <span class="req">*</span></label>
-        <input class="form-control" type="text" value="春节直播专属（复制）" />
+        <input class="form-control" type="text" id="copy-reusable-title" value="春节直播专属（复制）" />
       </div>
       <div class="form-group">
         <label class="form-label">兑换码口令 <span class="req">*</span></label>
-        <input class="form-control" type="text" placeholder="请输入新口令，同游戏全局唯一" />
+        <input class="form-control" type="text" id="copy-reusable-passcode" placeholder="请输入新口令，同游戏全局唯一" />
         <div class="form-hint">原口令不会复制，请重新填写</div>
       </div>
       <div class="form-grid-2">
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
-          <select class="form-control"><option selected>全部渠道</option><option>官方渠道</option><option>合作渠道</option></select>
+          <select class="form-control" id="copy-reusable-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-02-01T00:00" />
+          <input class="form-control" type="datetime-local" id="copy-reusable-start" value="2026-02-01T00:00" />
         </div>
         <div class="form-group">
           <label class="form-label">结束时间 <span class="req">*</span></label>
-          <input class="form-control" type="datetime-local" value="2026-02-28T23:59" />
+          <input class="form-control" type="datetime-local" id="copy-reusable-end" value="2026-02-28T23:59" />
         </div>
         <div class="form-group">
           <label class="form-label">可兑换次数上限</label>
-          <input class="form-control" type="number" value="10000" min="1" />
+          <input class="form-control" type="number" id="copy-reusable-max-usage" value="10000" min="1" />
         </div>
       </div>
       <div class="form-group">
@@ -1427,12 +1429,12 @@
         <div class="gift-config-box">
           <div id="copy-gift-rows">
             <div class="gift-config-row gift-row">
-              <select class="form-control" style="flex:1"><option>金币</option><option>钻石</option><option>经验药水·大</option><option>传说装备箱</option></select>
+              <select class="form-control" style="flex:1"><option value="">选择道具</option><option value="金币" selected>金币</option><option value="钻石">钻石</option><option value="经验药水·大">经验药水·大</option><option value="传说装备箱">传说装备箱</option></select>
               <input type="number" class="form-control" style="width:80px" value="5000" min="1" />
               <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeCopyGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
             </div>
             <div class="gift-config-row gift-row">
-              <select class="form-control" style="flex:1"><option>金币</option><option>钻石</option><option selected>经验药水·大</option><option>传说装备箱</option></select>
+              <select class="form-control" style="flex:1"><option value="">选择道具</option><option value="金币">金币</option><option value="钻石">钻石</option><option value="经验药水·大" selected>经验药水·大</option><option value="传说装备箱">传说装备箱</option></select>
               <input type="number" class="form-control" style="width:80px" value="10" min="1" />
               <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeCopyGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
             </div>
@@ -1449,6 +1451,7 @@
       <div class="form-group">
         <label class="form-label">用途 <span class="req">*</span></label>
         <select class="form-control" id="copy-reusable-purpose" onchange="onCopyReusablePurposeChange(this.value)">
+          <option value="">请选择用途</option>
           <option value="免费活动">免费活动</option>
           <option value="创作者激励">创作者激励</option>
           <option value="售卖" selected>售卖</option>
@@ -1456,9 +1459,9 @@
       </div>
       <div id="copy-reusable-purpose-free" class="form-group" style="display:none">
         <label class="form-label">免费活动类型 <span class="req">*</span></label>
-        <select class="form-control">
+        <select class="form-control" id="copy-reusable-free-sub">
           <option value="">请选择</option>
-          <option>营销活动</option><option>售后补偿</option><option>内部测试</option><option>商务合作</option>
+          <option value="营销活动">营销活动</option><option value="售后补偿">售后补偿</option><option value="内部测试">内部测试</option><option value="商务合作">商务合作</option>
         </select>
       </div>
       <div id="copy-reusable-purpose-creator" class="form-group" style="display:none">
@@ -1467,11 +1470,11 @@
       </div>
       <div id="copy-reusable-purpose-sale" class="form-group" style="display:block">
         <label class="form-label">售卖渠道 <span class="req">*</span></label>
-        <select class="form-control">
+        <select class="form-control" id="copy-reusable-sale-channel">
           <option value="">请选择售卖渠道</option>
-          <option>fanbook 商城</option><option>微信商城</option>
-          <option>抖音商城 · 官方店</option><option>抖音商城 · 合作店</option>
-          <option>商务合作</option><option>KOL 合作</option>
+          <option value="fanbook">fanbook 商城</option><option value="wechat">微信商城</option>
+          <option value="douyin-official">抖音商城 · 官方店</option><option value="douyin-partner">抖音商城 · 合作店</option>
+          <option value="biz">商务合作</option><option value="kol">KOL 合作</option>
         </select>
       </div>
       <div class="form-group">
@@ -1481,7 +1484,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-default" onclick="closeModal('modal-reusable-copy')">取消</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-reusable-copy');toast('复用兑换码活动已提交飞书审批，请留意审批通知','success')">
+      <button class="btn btn-primary" id="copy-reusable-submit" onclick="submitReusableCopy()">
         <iconify-icon icon="mdi:send-outline"></iconify-icon> 提交审批
       </button>
     </div>
@@ -1499,19 +1502,19 @@
       <div class="form-grid-2">
         <div class="form-group">
           <label class="form-label">类型 ID <span class="req">*</span></label>
-          <input class="form-control" type="text" placeholder="如 TYPE-004" />
+          <input class="form-control" type="text" id="item-type-id" placeholder="如 TYPE-004" />
         </div>
         <div class="form-group">
           <label class="form-label">类型名称 <span class="req">*</span></label>
-          <input class="form-control" type="text" placeholder="如 宠物" />
+          <input class="form-control" type="text" id="item-type-name" placeholder="如 宠物" />
         </div>
         <div class="form-group">
           <label class="form-label">物品 ID <span class="req">*</span></label>
-          <input class="form-control" type="text" placeholder="如 ITEM-4001" />
+          <input class="form-control" type="text" id="item-id" placeholder="如 ITEM-4001" />
         </div>
         <div class="form-group">
           <label class="form-label">物品名称 <span class="req">*</span></label>
-          <input class="form-control" type="text" placeholder="显示名称" />
+          <input class="form-control" type="text" id="item-name" placeholder="显示名称" />
         </div>
         <div class="form-group">
           <label class="form-label">最大数量</label>
@@ -1519,14 +1522,14 @@
         </div>
         <div class="form-group">
           <label class="form-label">价格（元） <span class="req">*</span></label>
-          <input class="form-control" type="number" min="0.01" step="0.01" placeholder="如 10.00" />
+          <input class="form-control" type="number" id="item-price" min="0.01" step="0.01" placeholder="如 10.00" />
           <div class="form-hint">商品原价，不考虑打折</div>
         </div>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-default" onclick="closeModal('modal-item-add')">取消</button>
-      <button class="btn btn-primary" onclick="closeModal('modal-item-add');toast('道具添加成功','success')">
+      <button class="btn btn-primary" onclick="submitItemAdd()">
         <iconify-icon icon="mdi:check"></iconify-icon> 确认添加
       </button>
     </div>
@@ -2225,7 +2228,7 @@
     row.innerHTML = `
       <select class="form-control" style="flex:1">
         <option value="">选择道具</option>
-        <option>金币</option><option>钻石</option><option>经验药水·大</option><option>传说装备箱</option>
+        <option value="金币">金币</option><option value="钻石">钻石</option><option value="经验药水·大">经验药水·大</option><option value="传说装备箱">传说装备箱</option>
       </select>
       <input type="number" class="form-control" style="width:80px" placeholder="数量" min="1" />
       <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeReusableGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
@@ -2246,7 +2249,7 @@
     row.innerHTML = `
       <select class="form-control" style="flex:1">
         <option value="">选择道具</option>
-        <option>金币</option><option>钻石</option><option>经验药水·大</option><option>传说装备箱</option>
+        <option value="金币">金币</option><option value="钻石">钻石</option><option value="经验药水·大">经验药水·大</option><option value="传说装备箱">传说装备箱</option>
       </select>
       <input type="number" class="form-control" style="width:80px" placeholder="数量" min="1" />
       <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeCopyGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
@@ -2267,7 +2270,7 @@
     row.innerHTML = `
       <select class="form-control" style="flex:1">
         <option value="">选择道具</option>
-        <option>金币</option><option>钻石</option><option>经验药水·大</option><option>传说装备箱</option>
+        <option value="金币">金币</option><option value="钻石">钻石</option><option value="经验药水·大">经验药水·大</option><option value="传说装备箱">传说装备箱</option>
       </select>
       <input type="number" class="form-control" style="width:80px" placeholder="数量" min="1" />
       <button class="btn btn-ghost" style="padding:0 6px;color:var(--text-tertiary)" onclick="removeSingleCopyGiftRow(this)" title="删除"><iconify-icon icon="mdi:close"></iconify-icon></button>
@@ -2424,8 +2427,30 @@
     var titleEl = document.getElementById('create-title');
     var title = titleEl ? titleEl.value.trim() : '';
     if (!title) { toast('请输入活动标题', 'error'); return; }
+    var channelEl = document.getElementById('create-channel');
+    if (!channelEl || !channelEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var startEl = document.getElementById('create-start');
+    if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
+    var endEl = document.getElementById('create-end');
+    if (!endEl || !endEl.value.trim()) { toast('请选择结束时间', 'error'); return; }
     var purposeSelect = document.getElementById('create-purpose');
     var purposeVal = purposeSelect ? purposeSelect.value : '';
+    if (!purposeVal) { toast('请选择用途', 'error'); return; }
+    if (purposeVal === '免费活动') {
+      var sub = document.getElementById('free-subtype');
+      if (!sub || !sub.value.trim()) { toast('请选择免费活动类型', 'error'); return; }
+    } else if (purposeVal === '售卖') {
+      var sale = document.getElementById('sale-channel');
+      if (!sale || !sale.value.trim()) { toast('请选择售卖渠道', 'error'); return; }
+    }
+    var giftRows = document.querySelectorAll('#gift-rows .gift-row');
+    var hasValidGift = false;
+    for (var i = 0; i < giftRows.length; i++) {
+      var sel = giftRows[i].querySelector('select');
+      var qtyInp = giftRows[i].querySelector('input[type="number"]');
+      if (sel && sel.value && sel.value.trim() && qtyInp && (parseInt(qtyInp.value, 10) || 0) > 0) { hasValidGift = true; break; }
+    }
+    if (!hasValidGift) { toast('请配置至少一道具及数量', 'error'); return; }
     var purposeLabel = purposeVal || '—';
     if (purposeVal === '免费活动') {
       var sub = document.getElementById('free-subtype');
@@ -2454,6 +2479,141 @@
     titleEl.value = '';
     if (purposeSelect) purposeSelect.value = '';
     onPurposeChange('');
+  }
+
+  function submitItemAdd() {
+    var typeId = document.getElementById('item-type-id');
+    if (!typeId || !typeId.value.trim()) { toast('请输入类型 ID', 'error'); return; }
+    var typeName = document.getElementById('item-type-name');
+    if (!typeName || !typeName.value.trim()) { toast('请输入类型名称', 'error'); return; }
+    var itemId = document.getElementById('item-id');
+    if (!itemId || !itemId.value.trim()) { toast('请输入物品 ID', 'error'); return; }
+    var itemName = document.getElementById('item-name');
+    if (!itemName || !itemName.value.trim()) { toast('请输入物品名称', 'error'); return; }
+    var priceEl = document.getElementById('item-price');
+    var price = priceEl ? parseFloat(priceEl.value) : NaN;
+    if (!priceEl || isNaN(price) || price <= 0) { toast('请输入有效的价格（元）', 'error'); return; }
+    closeModal('modal-item-add');
+    toast('道具添加成功', 'success');
+  }
+
+  function submitReusableCopy() {
+    var titleEl = document.getElementById('copy-reusable-title');
+    if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
+    var passEl = document.getElementById('copy-reusable-passcode');
+    if (!passEl || !passEl.value.trim()) { toast('请输入兑换码口令', 'error'); return; }
+    var chEl = document.getElementById('copy-reusable-channel');
+    if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var startEl = document.getElementById('copy-reusable-start');
+    if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
+    var endEl = document.getElementById('copy-reusable-end');
+    if (!endEl || !endEl.value.trim()) { toast('请选择结束时间', 'error'); return; }
+    var purposeEl = document.getElementById('copy-reusable-purpose');
+    var purposeVal = purposeEl ? purposeEl.value : '';
+    if (!purposeVal) { toast('请选择用途', 'error'); return; }
+    if (purposeVal === '免费活动') {
+      var sub = document.getElementById('copy-reusable-free-sub');
+      if (!sub || !sub.value.trim()) { toast('请选择免费活动类型', 'error'); return; }
+    } else if (purposeVal === '售卖') {
+      var sale = document.getElementById('copy-reusable-sale-channel');
+      if (!sale || !sale.value.trim()) { toast('请选择售卖渠道', 'error'); return; }
+    }
+    var giftRows = document.querySelectorAll('#copy-gift-rows .gift-row');
+    var hasValidGift = false;
+    for (var i = 0; i < giftRows.length; i++) {
+      var sel = giftRows[i].querySelector('select');
+      var qtyInp = giftRows[i].querySelector('input[type="number"]');
+      if (sel && sel.value && sel.value.trim() && qtyInp && (parseInt(qtyInp.value, 10) || 0) > 0) { hasValidGift = true; break; }
+    }
+    if (!hasValidGift) { toast('请配置至少一道具及数量', 'error'); return; }
+    var maxUsageEl = document.getElementById('copy-reusable-max-usage');
+    var maxUsage = maxUsageEl ? parseInt(maxUsageEl.value, 10) : 0;
+    closeModal('modal-reusable-copy');
+    toast('复用兑换码活动已提交飞书审批，请留意审批通知', 'success');
+  }
+
+  function submitReusableEdit() {
+    var titleEl = document.getElementById('reusable-edit-title');
+    if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
+    var chEl = document.getElementById('reusable-edit-channel');
+    if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var startEl = document.getElementById('reusable-edit-start');
+    if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
+    var endEl = document.getElementById('reusable-edit-end');
+    if (!endEl || !endEl.value.trim()) { toast('请选择结束时间', 'error'); return; }
+    closeModal('modal-reusable-edit');
+    toast('修改已保存', 'success');
+  }
+
+  function submitEditAct() {
+    var titleEl = document.getElementById('edit-title');
+    if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
+    var chEl = document.getElementById('edit-channel');
+    if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var startEl = document.getElementById('edit-start');
+    if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
+    var endEl = document.getElementById('edit-end');
+    if (!endEl || !endEl.value.trim()) { toast('请选择结束时间', 'error'); return; }
+    closeModal('modal-edit');
+    toast('活动信息已更新', 'success');
+  }
+
+  function submitSingleCopy() {
+    var titleEl = document.getElementById('copy-title');
+    if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
+    var chEl = document.getElementById('copy-channel');
+    if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var startEl = document.getElementById('copy-start');
+    if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
+    var endEl = document.getElementById('copy-end');
+    if (!endEl || !endEl.value.trim()) { toast('请选择结束时间', 'error'); return; }
+    var purposeEl = document.getElementById('copy-purpose');
+    if (!purposeEl || !purposeEl.value.trim()) { toast('请选择用途', 'error'); return; }
+    var giftRows = document.querySelectorAll('#single-copy-gift-rows .gift-row');
+    var hasValidGift = false;
+    for (var i = 0; i < giftRows.length; i++) {
+      var sel = giftRows[i].querySelector('select');
+      var qtyInp = giftRows[i].querySelector('input[type="number"]');
+      if (sel && sel.value && sel.value.trim() && qtyInp && (parseInt(qtyInp.value, 10) || 0) > 0) { hasValidGift = true; break; }
+    }
+    if (!hasValidGift) { toast('请配置至少一道具及数量', 'error'); return; }
+    closeModal('modal-single-copy');
+    toast('活动创建成功，可进行生成申请', 'success');
+  }
+
+  function submitReusableCreate() {
+    var titleEl = document.getElementById('reusable-create-title');
+    if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
+    var passEl = document.getElementById('reusable-create-passcode');
+    if (!passEl || !passEl.value.trim()) { toast('请输入兑换码口令', 'error'); return; }
+    var chEl = document.getElementById('reusable-create-channel');
+    if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var startEl = document.getElementById('reusable-create-start');
+    if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
+    var endEl = document.getElementById('reusable-create-end');
+    if (!endEl || !endEl.value.trim()) { toast('请选择结束时间', 'error'); return; }
+    var purposeEl = document.getElementById('create-reusable-purpose');
+    var purposeVal = purposeEl ? purposeEl.value : '';
+    if (!purposeVal) { toast('请选择用途', 'error'); return; }
+    if (purposeVal === '免费活动') {
+      var sub = document.getElementById('reusable-purpose-free-sub');
+      if (!sub || !sub.value.trim()) { toast('请选择免费活动类型', 'error'); return; }
+    } else if (purposeVal === '售卖') {
+      var sale = document.getElementById('reusable-purpose-sale-channel');
+      if (!sale || !sale.value.trim()) { toast('请选择售卖渠道', 'error'); return; }
+    }
+    var giftRows = document.querySelectorAll('#reusable-gift-rows .gift-row');
+    var hasValidGift = false;
+    for (var i = 0; i < giftRows.length; i++) {
+      var sel = giftRows[i].querySelector('select');
+      var qtyInp = giftRows[i].querySelector('input[type="number"]');
+      if (sel && sel.value && sel.value.trim() && qtyInp && (parseInt(qtyInp.value, 10) || 0) > 0) { hasValidGift = true; break; }
+    }
+    if (!hasValidGift) { toast('请配置至少一道具及数量', 'error'); return; }
+    var maxUsageEl = document.getElementById('reusable-create-max-usage');
+    var maxUsage = maxUsageEl ? parseInt(maxUsageEl.value, 10) : 0;
+    closeModal('modal-reusable-create');
+    toast('复用兑换码活动已提交飞书审批，请留意审批通知', 'success');
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -2712,8 +2872,8 @@
     if (roleName) roleName.value = '';
     const emptyEl = document.getElementById('cs-single-empty');
     const resultEl = document.getElementById('cs-single-result');
-    if (emptyEl) emptyEl.style.display = 'none';
-    if (resultEl) resultEl.style.display = 'block';
+    if (emptyEl) emptyEl.style.display = 'block';
+    if (resultEl) resultEl.style.display = 'none';
   }
 
   // ===== ROLE =====
