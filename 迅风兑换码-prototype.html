@@ -858,6 +858,10 @@
           <select class="form-control" id="create-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
+          <label class="form-label">版本 <span class="req">*</span></label>
+          <input class="form-control" type="text" id="create-version" placeholder="如 2.5.0" />
+        </div>
+        <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
           <input class="form-control" type="datetime-local" id="create-start" />
         </div>
@@ -992,6 +996,10 @@
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
           <select class="form-control" id="copy-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">版本 <span class="req">*</span></label>
+          <input class="form-control" type="text" id="copy-version" placeholder="如 2.5.0" value="2.5.0" />
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -1169,6 +1177,10 @@
           <select class="form-control" id="edit-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
+          <label class="form-label">版本 <span class="req">*</span></label>
+          <input class="form-control" type="text" id="edit-version" placeholder="如 2.5.0" value="2.5.0" />
+        </div>
+        <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
           <input class="form-control" type="datetime-local" id="edit-start" value="2026-03-01T00:00" />
         </div>
@@ -1248,6 +1260,10 @@
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
           <select class="form-control" id="reusable-create-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">版本 <span class="req">*</span></label>
+          <input class="form-control" type="text" id="reusable-create-version" placeholder="如 2.5.0" />
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -1363,6 +1379,10 @@
           <select class="form-control" id="reusable-edit-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
         </div>
         <div class="form-group">
+          <label class="form-label">版本 <span class="req">*</span></label>
+          <input class="form-control" type="text" id="reusable-edit-version" placeholder="如 2.5.0" value="2.5.0" />
+        </div>
+        <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
           <input class="form-control" type="datetime-local" id="reusable-edit-start" value="2026-02-01T00:00" />
         </div>
@@ -1410,6 +1430,10 @@
         <div class="form-group">
           <label class="form-label">渠道 <span class="req">*</span></label>
           <select class="form-control" id="copy-reusable-channel"><option selected value="全部渠道">全部渠道</option><option value="官方渠道">官方渠道</option><option value="合作渠道">合作渠道</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">版本 <span class="req">*</span></label>
+          <input class="form-control" type="text" id="copy-reusable-version" placeholder="如 2.5.0" value="2.5.0" />
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -2429,6 +2453,8 @@
     if (!title) { toast('请输入活动标题', 'error'); return; }
     var channelEl = document.getElementById('create-channel');
     if (!channelEl || !channelEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var versionEl = document.getElementById('create-version');
+    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
     var startEl = document.getElementById('create-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('create-end');
@@ -2504,6 +2530,8 @@
     if (!passEl || !passEl.value.trim()) { toast('请输入兑换码口令', 'error'); return; }
     var chEl = document.getElementById('copy-reusable-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var versionEl = document.getElementById('copy-reusable-version');
+    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
     var startEl = document.getElementById('copy-reusable-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('copy-reusable-end');
@@ -2537,6 +2565,8 @@
     if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
     var chEl = document.getElementById('reusable-edit-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var versionEl = document.getElementById('reusable-edit-version');
+    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
     var startEl = document.getElementById('reusable-edit-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('reusable-edit-end');
@@ -2550,6 +2580,8 @@
     if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
     var chEl = document.getElementById('edit-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var versionEl = document.getElementById('edit-version');
+    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
     var startEl = document.getElementById('edit-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('edit-end');
@@ -2563,6 +2595,8 @@
     if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
     var chEl = document.getElementById('copy-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var versionEl = document.getElementById('copy-version');
+    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
     var startEl = document.getElementById('copy-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('copy-end');
@@ -2588,6 +2622,8 @@
     if (!passEl || !passEl.value.trim()) { toast('请输入兑换码口令', 'error'); return; }
     var chEl = document.getElementById('reusable-create-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
+    var versionEl = document.getElementById('reusable-create-version');
+    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
     var startEl = document.getElementById('reusable-create-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('reusable-create-end');
