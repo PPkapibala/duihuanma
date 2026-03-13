@@ -233,6 +233,62 @@
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #d9d9d9; border-radius: 3px; }
+
+    /* ===== 审批流程页面样式参考 BPM ===== */
+    .bpm-ref-page { max-width: 900px; margin: 0 auto; background: var(--bg-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+    .bpm-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .bpm-header-left { display: flex; align-items: flex-start; gap: 12px; flex: 1; min-width: 0; }
+    .bpm-avatar { width: 48px; height: 48px; background: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; font-weight: 700; flex-shrink: 0; }
+    .bpm-title-wrap { flex: 1; min-width: 0; }
+    .bpm-title { font-size: 18px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+    .bpm-meta { font-size: 13px; color: var(--text-tertiary); }
+    .bpm-meta span { margin-right: 16px; }
+    .bpm-header-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .bpm-status { padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; }
+    .bpm-status.pending { background: #fff7e6; color: #d46b08; }
+    .bpm-status.approved { background: #f6ffed; color: #389e0d; }
+    .bpm-status.rejected { background: #fff2f0; color: #cf1322; }
+    .bpm-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .bpm-actions .btn { padding: 6px 12px; height: 32px; font-size: 13px; border-radius: var(--radius); border: 1px solid var(--border); background: #fff; color: var(--text-secondary); cursor: pointer; font-family: inherit; }
+    .bpm-actions .btn:hover { border-color: var(--primary); color: var(--primary); }
+    .bpm-section { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+    .bpm-section:last-of-type { border-bottom: none; }
+    .bpm-section-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .bpm-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+    .bpm-field { display: flex; flex-direction: column; gap: 4px; }
+    .bpm-field label { font-size: 13px; color: var(--text-secondary); }
+    .bpm-field .value { height: 36px; padding: 0 12px; background: #f5f6f8; border: 1px solid var(--border); border-radius: var(--radius); font-size: 14px; color: var(--text-primary); display: flex; align-items: center; }
+    .bpm-summary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px 24px; }
+    .bpm-summary-item { padding: 12px 14px; background: #f5f6f8; border: 1px solid var(--border); border-radius: var(--radius); }
+    .bpm-summary-item .label { font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px; }
+    .bpm-summary-item .val { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .bpm-summary-one { padding: 12px 14px; background: #f5f6f8; border: 1px solid var(--border); border-radius: var(--radius); font-size: 14px; color: var(--text-primary); margin: 0; }
+    .bpm-table-wrap { overflow-x: auto; margin-top: 12px; }
+    .bpm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .bpm-table th { text-align: left; padding: 10px 12px; background: #fafafa; font-weight: 600; color: var(--text-secondary); border: 1px solid var(--border); }
+    .bpm-table td { padding: 10px 12px; border: 1px solid var(--border); color: var(--text-primary); }
+    .bpm-table tbody tr:hover { background: #fafafa; }
+    .bpm-table .td-num { font-variant-numeric: tabular-nums; }
+    .bpm-table .btn-link { background: none; border: none; color: var(--primary); cursor: pointer; font-size: 13px; font-family: inherit; padding: 0 4px; }
+    .bpm-table .btn-link:hover { text-decoration: underline; }
+    .bpm-footer { padding: 16px 24px; background: #fafafa; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px; }
+    .bpm-footer .btn { padding: 8px 20px; height: 36px; font-size: 14px; border-radius: var(--radius); cursor: pointer; font-family: inherit; font-weight: 500; border: 1px solid transparent; }
+    .bpm-footer .btn-default { background: #fff; border-color: var(--border); color: var(--text-primary); }
+    .bpm-footer .btn-default:hover { border-color: var(--primary); color: var(--primary); }
+    .bpm-footer .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .bpm-footer .btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+    .bpm-footer .btn-danger { background: #fff; border-color: var(--error); color: var(--error); }
+    .bpm-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .bpm-modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .bpm-modal { background: var(--bg-surface); border-radius: var(--radius-lg); box-shadow: 0 8px 40px rgba(0,0,0,.18); width: 560px; max-width: 100%; max-height: 90vh; overflow-y: auto; }
+    .bpm-modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .bpm-modal-title { font-size: 16px; font-weight: 600; }
+    .bpm-modal-close { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--text-tertiary); padding: 4px; line-height: 1; }
+    .bpm-modal-close:hover { color: var(--text-primary); }
+    .bpm-modal-body { padding: 20px; }
+    .bpm-modal-body .bpm-section-title { margin-bottom: 12px; border-bottom: none; padding-bottom: 0; }
+    .bpm-modal-body .bpm-grid-2 { gap: 10px 20px; }
+    .bpm-modal-body .bpm-field .value { height: 32px; font-size: 13px; }
   </style>
 </head>
 <body>
@@ -262,11 +318,26 @@
     <button class="sidebar-item" onclick="nav(this,'items')">
       <iconify-icon icon="mdi:package-variant-closed"></iconify-icon> 道具管理
     </button>
+    <button class="sidebar-item" onclick="nav(this,'approvers')">
+      <iconify-icon icon="mdi:account-check-outline"></iconify-icon> 审批人配置
+    </button>
+    <button class="sidebar-item" onclick="nav(this,'report-notify')">
+      <iconify-icon icon="mdi:bell-ring-outline"></iconify-icon> 报表通知配置
+    </button>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-label">数据</div>
     <button class="sidebar-item" onclick="toast('报表模块由大数据平台提供，即将跳转…','info')">
       <iconify-icon icon="mdi:chart-bar"></iconify-icon> 兑换码报表
+    </button>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">参考</div>
+    <button class="sidebar-item" onclick="nav(this,'bpm-ref')">
+      <iconify-icon icon="mdi:file-document-outline"></iconify-icon> 审批流程页面样式参考
+    </button>
+    <button class="sidebar-item" onclick="nav(this,'reusable-bpm-ref')">
+      <iconify-icon icon="mdi:file-document-outline"></iconify-icon> 复用兑换码审批流程参考
     </button>
   </div>
 </aside>
@@ -346,20 +417,6 @@
             <iconify-icon icon="mdi:magnify"></iconify-icon> 查询
           </button>
           <button class="btn btn-default" onclick="onCodesReset()">重置</button>
-          <div style="margin-left:auto;display:flex;gap:8px">
-            <input type="file" id="single-batch-upload-query" accept=".xlsx,.xls,.txt" style="display:none" onchange="onBatchFileSelected(event,'query')" />
-            <button class="btn btn-default" onclick="openBatchTemplateModal('query')">
-              <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传查询
-            </button>
-            <input type="file" id="single-batch-upload-disable" accept=".xlsx,.xls" style="display:none" onchange="onBatchFileSelected(event,'disable')" />
-            <button class="btn btn-default" onclick="openBatchTemplateModal('disable')">
-              <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传禁用
-            </button>
-            <input type="file" id="single-batch-upload-enable" accept=".xlsx,.xls" style="display:none" onchange="onBatchFileSelected(event,'enable')" />
-            <button class="btn btn-default" onclick="openBatchTemplateModal('enable')">
-              <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传解禁
-            </button>
-          </div>
         </div>
         <div class="table-wrap">
           <table>
@@ -576,6 +633,20 @@
       <div class="tab-panel active" id="cs-single">
         <div class="card">
           <div class="card-header"><div class="card-title"><iconify-icon icon="mdi:magnify"></iconify-icon> 查询条件</div></div>
+          <div class="filter-bar" style="margin-left:16px;margin-right:16px;margin-bottom:0;border-top:1px solid var(--border-light)">
+            <input type="file" id="single-batch-upload-query" accept=".xlsx,.xls,.txt" style="display:none" onchange="onBatchFileSelected(event,'query')" />
+            <button class="btn btn-default" onclick="openBatchTemplateModal('query')">
+              <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传查询
+            </button>
+            <input type="file" id="single-batch-upload-disable" accept=".xlsx,.xls" style="display:none" onchange="onBatchFileSelected(event,'disable')" />
+            <button class="btn btn-default" onclick="openBatchTemplateModal('disable')">
+              <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传禁用
+            </button>
+            <input type="file" id="single-batch-upload-enable" accept=".xlsx,.xls" style="display:none" onchange="onBatchFileSelected(event,'enable')" />
+            <button class="btn btn-default" onclick="openBatchTemplateModal('enable')">
+              <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传解禁
+            </button>
+          </div>
           <div class="card-body">
             <div class="form-grid-2">
               <div class="form-group">
@@ -693,14 +764,13 @@
               <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">活动标题：</span><strong>春节直播专属</strong></div>
               <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">兑换码口令：</span><code style="background:#f0f2f5;padding:1px 6px;border-radius:3px">SPRING2026</code></div>
               <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">渠道：</span>官方渠道</div>
+              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">版本：</span>2.5.0</div>
               <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">开始时间：</span><span style="font-variant-numeric:tabular-nums">2026-02-01 00:00</span></div>
               <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">结束时间：</span><span style="font-variant-numeric:tabular-nums">2026-02-28 23:59</span></div>
               <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">可兑换次数上限：</span><strong>10,000</strong></div>
-              <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">已兑换次数：</span><span style="color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums">6,823</span></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">单码价值：</span><span style="color:var(--error);font-weight:700">约 ¥50.00 元</span></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)" colspan="2"><span style="color:var(--text-tertiary)">备注：</span>用于直播引流</div>
+              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">预计生成价值：</span><strong>约 ¥500,000 元</strong></div>
               <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"></div>
-              <div style="padding:9px 12px;grid-column:1/-1">
+              <div style="padding:9px 12px;grid-column:1/-1;border-bottom:1px solid var(--border-light)">
                 <div style="color:var(--text-tertiary);font-size:12px;margin-bottom:6px">礼包配置：</div>
                 <table class="gift-table">
                   <thead><tr><th>道具名称</th><th>数量</th><th>单价</th><th>小计</th></tr></thead>
@@ -710,6 +780,11 @@
                   </tbody>
                 </table>
               </div>
+              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">单码价值：</span><span style="color:var(--error);font-weight:700">约 ¥50.00 元</span></div>
+              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">用途：</span>免费活动 · 营销活动</div>
+              <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">备注：</span>用于直播引流</div>
+              <div style="padding:9px 12px;grid-column:1/-1;background:var(--bg-secondary);border-bottom:1px solid var(--border-light);font-size:12px;color:var(--text-tertiary)">统计（仅查看）</div>
+              <div style="padding:9px 12px;grid-column:1/-1"><span style="color:var(--text-tertiary)">已兑换次数：</span><span style="color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums">6,823</span></div>
             </div>
           </div>
 
@@ -746,12 +821,16 @@
 
     <!-- ========== 道具管理 ========== -->
     <div class="page" id="page-items">
+      <input type="file" id="items-batch-upload-file" accept=".xlsx,.xls" style="display:none" onchange="onItemsBatchFileSelected(event)" />
       <div class="card">
         <div class="card-header">
           <div class="card-title"><iconify-icon icon="mdi:package-variant-closed"></iconify-icon> 道具管理</div>
           <div class="btn-group">
-            <button class="btn btn-default" data-role-ops onclick="toast('请选择 Excel 文件批量上传','info')">
+            <button class="btn btn-default" data-role-ops onclick="openModal('modal-items-upload')">
               <iconify-icon icon="mdi:upload-outline"></iconify-icon> 批量上传
+            </button>
+            <button class="btn btn-default" data-role-ops onclick="toast('正在导出道具列表…','info')">
+              <iconify-icon icon="mdi:download-outline"></iconify-icon> 批量下载
             </button>
             <button class="btn btn-danger" data-role-ops onclick="toast('请先勾选要删除的道具','warning')">
               <iconify-icon icon="mdi:delete-outline"></iconify-icon> 批量删除
@@ -841,8 +920,250 @@
       </div>
     </div>
 
+    <!-- ========== 审批人配置 ========== -->
+    <div class="page" id="page-approvers">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><iconify-icon icon="mdi:account-check-outline"></iconify-icon> 项目审批人配置</div>
+        </div>
+        <div class="card-body">
+          <p style="color:var(--text-tertiary);font-size:13px;margin-bottom:18px">配置一级、二级审批人，每级可配置多名人员，同级多人之间为<strong>或</strong>的关系（任一通过即可）。发起 BPM 审批时将按此配置匹配审批人（可同步至飞书审批流）。</p>
+
+          <div class="form-group" style="margin-bottom:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+              <label class="form-label" style="margin:0">一级审批人</label>
+              <button class="btn btn-default" onclick="toast('新增一级审批人','info')"><iconify-icon icon="mdi:plus"></iconify-icon> 新增</button>
+            </div>
+            <p style="color:var(--text-tertiary);font-size:12px;margin-bottom:8px">可配置多名，多人之间为或的关系（任一通过即可）</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>审批人</th><th>飞书 user_id / 工号</th><th>备注</th><th>操作</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>张三</td><td class="td-mono">ou_xxx</td><td style="color:var(--text-tertiary)">—</td>
+                    <td><button class="btn-text" onclick="toast('修改','info')">修改</button> <button class="btn-text danger" onclick="toast('删除','info')">删除</button></td>
+                  </tr>
+                  <tr>
+                    <td>李四</td><td class="td-mono">ou_yyy</td><td style="color:var(--text-tertiary)">—</td>
+                    <td><button class="btn-text" onclick="toast('修改','info')">修改</button> <button class="btn-text danger" onclick="toast('删除','info')">删除</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+              <label class="form-label" style="margin:0">二级审批人</label>
+              <button class="btn btn-default" onclick="toast('新增二级审批人','info')"><iconify-icon icon="mdi:plus"></iconify-icon> 新增</button>
+            </div>
+            <p style="color:var(--text-tertiary);font-size:12px;margin-bottom:8px">可配置多名，多人之间为或的关系（任一通过即可）</p>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>审批人</th><th>飞书 user_id / 工号</th><th>备注</th><th>操作</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>王五</td><td class="td-mono">ou_zzz</td><td style="color:var(--text-tertiary)">—</td>
+                    <td><button class="btn-text" onclick="toast('修改','info')">修改</button> <button class="btn-text danger" onclick="toast('删除','info')">删除</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 报表通知配置 ========== -->
+    <div class="page" id="page-report-notify">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><iconify-icon icon="mdi:bell-ring-outline"></iconify-icon> 项目统计报表通知配置</div>
+          <div class="btn-group">
+            <button class="btn btn-default" onclick="toast('发送测试推送','info')">测试推送</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <p style="color:var(--text-tertiary);font-size:13px;margin-bottom:14px">配置接收日报/周报/月报的飞书群，系统将把改动内容与每日、周、月总结统计同步到报表，并通过飞书 Bot 通知群内成员。</p>
+          <div class="form-group">
+            <label class="form-label">飞书群（Webhook 或群 ID）</label>
+            <input class="form-control" type="text" placeholder="填写飞书群机器人 Webhook 或群 ID" style="max-width:400px" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">报表类型与推送时间</label>
+            <p style="color:var(--text-tertiary);font-size:12px;margin-bottom:12px">每日、周、月报表可勾选启用，并配置推送时间。</p>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <label style="display:flex;align-items:center;gap:6px;font-weight:400"><input type="checkbox" checked /> 日报</label>
+                <span style="font-size:13px;color:var(--text-tertiary)">每日</span>
+                <input class="f-input" type="time" value="09:00" style="width:90px" />
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <label style="display:flex;align-items:center;gap:6px;font-weight:400"><input type="checkbox" checked /> 周报</label>
+                <span style="font-size:13px;color:var(--text-tertiary)">每周</span>
+                <select class="f-select" style="width:100px"><option value="1">周一</option><option value="2">周二</option><option value="3">周三</option><option value="4">周四</option><option value="5">周五</option><option value="6">周六</option><option value="0">周日</option></select>
+                <input class="f-input" type="time" value="09:00" style="width:90px" />
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <label style="display:flex;align-items:center;gap:6px;font-weight:400"><input type="checkbox" checked /> 月报</label>
+                <span style="font-size:13px;color:var(--text-tertiary)">每月</span>
+                <select class="f-select" style="width:80px"><option value="1">1 日</option><option value="2">2 日</option><option value="15">15 日</option><option value="28">28 日</option></select>
+                <input class="f-input" type="time" value="09:00" style="width:90px" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group" style="background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 12px">
+            <div style="font-size:13px;color:var(--text-secondary)">推送内容<strong>必须</strong>包含「后台改动记录」</div>
+          </div>
+          <button class="btn btn-primary" onclick="toast('配置已保存','success')">保存配置</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== 审批流程页面样式参考 ========== -->
+    <div class="page" id="page-bpm-ref">
+      <div class="bpm-ref-page">
+        <header class="bpm-header">
+          <div class="bpm-header-left">
+            <div class="bpm-avatar">JZ</div>
+            <div class="bpm-title-wrap">
+              <h1 class="bpm-title">Jay.zhu 发起的单人兑换码生成申请</h1>
+              <div class="bpm-meta">
+                <span>编号：176733</span>
+                <span>所属游戏：幻境大陆</span>
+                <span>产品组 · 运营中心</span>
+              </div>
+            </div>
+          </div>
+          <div class="bpm-header-right">
+            <span class="bpm-status pending">审批中</span>
+            <div class="bpm-actions">
+              <button type="button" class="btn" onclick="toast('查看流程图','info')">查看流程图</button>
+              <button type="button" class="btn" onclick="toast('最新视图','info')">最新视图</button>
+              <button type="button" class="btn" onclick="toast('历史视图','info')">历史视图</button>
+              <button type="button" class="btn" onclick="toast('打印','info')" title="打印">⎘</button>
+            </div>
+          </div>
+        </header>
+        <section class="bpm-section">
+          <h2 class="bpm-section-title">基本信息</h2>
+          <div class="bpm-grid-2">
+            <div class="bpm-field"><label>申请日期</label><div class="value">2026-03-06</div></div>
+            <div class="bpm-field"><label>申请人</label><div class="value">Jay.zhu</div></div>
+            <div class="bpm-field"><label>申请部门</label><div class="value">彩虹运营组</div></div>
+          </div>
+        </section>
+        <section class="bpm-section">
+          <h2 class="bpm-section-title">汇总</h2>
+          <p class="bpm-summary-one">申请人 <strong>Jay.zhu</strong> 于 <strong>2026-03-06 10:30</strong> 申请，共 <strong>3</strong> 个活动，本单总生成 <strong>12,000</strong> 个码，总预计生成价值（商业化）<strong>¥240,000 元</strong>。</p>
+        </section>
+        <section class="bpm-section">
+          <h2 class="bpm-section-title">明细</h2>
+          <div class="bpm-table-wrap">
+            <table class="bpm-table">
+              <thead>
+                <tr>
+                  <th>序号</th><th>活动名称</th><th>生成码个数</th><th>用途</th><th>本次生成价值</th><th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="td-num">1</td><td>3月登录礼包</td><td class="td-num">5,000</td><td>免费活动 · 营销活动</td><td class="td-num">¥100,000 元</td><td><button type="button" class="btn-link" onclick="openBpmDetail(1)">详情</button></td></tr>
+                <tr><td class="td-num">2</td><td>2月留存活动</td><td class="td-num">4,000</td><td>免费活动 · 营销活动</td><td class="td-num">¥80,000 元</td><td><button type="button" class="btn-link" onclick="openBpmDetail(2)">详情</button></td></tr>
+                <tr><td class="td-num">3</td><td>KOL 合作码</td><td class="td-num">3,000</td><td>售卖 · KOL合作</td><td class="td-num">¥60,000 元</td><td><button type="button" class="btn-link" onclick="openBpmDetail(3)">详情</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <footer class="bpm-footer">
+          <button type="button" class="btn btn-default" onclick="toast('驳回','info')">驳回</button>
+          <button type="button" class="btn btn-primary" onclick="toast('通过','info')">通过</button>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ========== 复用兑换码审批流程参考 ========== -->
+    <div class="page" id="page-reusable-bpm-ref">
+      <div class="bpm-ref-page">
+        <header class="bpm-header">
+          <div class="bpm-header-left">
+            <div class="bpm-avatar">JZ</div>
+            <div class="bpm-title-wrap">
+              <h1 class="bpm-title">Jay.zhu 发起的复用兑换码生成申请</h1>
+              <div class="bpm-meta">
+                <span>编号：176734</span>
+                <span>所属游戏：幻境大陆</span>
+                <span>产品组 · 运营中心</span>
+              </div>
+            </div>
+          </div>
+          <div class="bpm-header-right">
+            <span class="bpm-status pending">审批中</span>
+            <div class="bpm-actions">
+              <button type="button" class="btn" onclick="toast('查看流程图','info')">查看流程图</button>
+              <button type="button" class="btn" onclick="toast('最新视图','info')">最新视图</button>
+              <button type="button" class="btn" onclick="toast('历史视图','info')">历史视图</button>
+              <button type="button" class="btn" onclick="toast('打印','info')" title="打印">⎘</button>
+            </div>
+          </div>
+        </header>
+        <section class="bpm-section">
+          <h2 class="bpm-section-title">基本信息</h2>
+          <div class="bpm-grid-2">
+            <div class="bpm-field"><label>申请日期</label><div class="value">2026-03-06</div></div>
+            <div class="bpm-field"><label>申请人</label><div class="value">Jay.zhu</div></div>
+            <div class="bpm-field"><label>申请部门</label><div class="value">彩虹运营组</div></div>
+          </div>
+        </section>
+        <section class="bpm-section">
+          <h2 class="bpm-section-title">活动信息</h2>
+          <div class="bpm-grid-2">
+            <div class="bpm-field"><label>活动标题</label><div class="value">春节复用礼包</div></div>
+            <div class="bpm-field"><label>兑换码口令</label><div class="value">SPRING2026</div></div>
+            <div class="bpm-field"><label>渠道</label><div class="value">官方</div></div>
+            <div class="bpm-field"><label>版本</label><div class="value">2.5.0</div></div>
+            <div class="bpm-field"><label>开始时间</label><div class="value">2026-03-01 00:00</div></div>
+            <div class="bpm-field"><label>结束时间</label><div class="value">2026-03-31 23:59</div></div>
+            <div class="bpm-field"><label>活动可兑换次数上限</label><div class="value">不限</div></div>
+            <div class="bpm-field"><label>预计生成价值</label><div class="value">不限</div></div>
+            <div class="bpm-field"><label>礼包配置</label><div class="value">钻石 ×500</div></div>
+            <div class="bpm-field"><label>单码价值</label><div class="value">¥50.00 元</div></div>
+            <div class="bpm-field"><label>用途</label><div class="value">免费活动 · 营销活动</div></div>
+            <div class="bpm-field" style="grid-column:1/-1"><label>备注</label><div class="value">用于直播引流</div></div>
+          </div>
+        </section>
+        <section class="bpm-section">
+          <h2 class="bpm-section-title">汇总</h2>
+          <p class="bpm-summary-one">申请人 <strong>Jay.zhu</strong> 于 <strong>2026-03-06</strong> 申请复用兑换码活动「春节复用礼包」，可兑换次数上限 <strong>不限</strong>，预计生成价值 <strong>不限</strong>。</p>
+        </section>
+        <footer class="bpm-footer">
+          <button type="button" class="btn btn-default" onclick="toast('驳回','info')">驳回</button>
+          <button type="button" class="btn btn-primary" onclick="toast('通过','info')">通过</button>
+        </footer>
+      </div>
+    </div>
+
   </div><!-- /content -->
 </div><!-- /main -->
+
+<!-- ===== MODAL: BPM 审批单 · 活动详情 ===== -->
+<div class="bpm-modal-overlay" id="modal-bpm-detail">
+  <div class="bpm-modal">
+    <div class="bpm-modal-header">
+      <span class="bpm-modal-title" id="bpm-detail-title">活动详情 · 3月登录礼包</span>
+      <button type="button" class="bpm-modal-close" onclick="closeBpmDetail()" aria-label="关闭">&times;</button>
+    </div>
+    <div class="bpm-modal-body">
+      <h3 class="bpm-section-title">活动信息</h3>
+      <div class="bpm-grid-2" id="bpm-detail-activity"></div>
+      <h3 class="bpm-section-title" style="margin-top:20px">本次生成信息</h3>
+      <div class="bpm-grid-2" id="bpm-detail-generate"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== MODAL: 新增单人码活动 ===== -->
 <div class="modal-overlay" id="modal-create">
@@ -859,7 +1180,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">版本 <span class="req">*</span></label>
-          <input class="form-control" type="text" id="create-version" placeholder="如 2.5.0" />
+          <select class="form-control" id="create-version"><option value="">请选择</option><option value="2.5.0">2.5.0</option><option value="2.4.0">2.4.0</option><option value="2.3.0">2.3.0</option><option value="2.2.0">2.2.0</option><option value="2.1.0">2.1.0</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -999,7 +1320,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">版本 <span class="req">*</span></label>
-          <input class="form-control" type="text" id="copy-version" placeholder="如 2.5.0" value="2.5.0" />
+          <select class="form-control" id="copy-version"><option value="">请选择</option><option value="2.5.0" selected>2.5.0</option><option value="2.4.0">2.4.0</option><option value="2.3.0">2.3.0</option><option value="2.2.0">2.2.0</option><option value="2.1.0">2.1.0</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -1178,7 +1499,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">版本 <span class="req">*</span></label>
-          <input class="form-control" type="text" id="edit-version" placeholder="如 2.5.0" value="2.5.0" />
+          <select class="form-control" id="edit-version"><option value="">请选择</option><option value="2.5.0" selected>2.5.0</option><option value="2.4.0">2.4.0</option><option value="2.3.0">2.3.0</option><option value="2.2.0">2.2.0</option><option value="2.1.0">2.1.0</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -1263,7 +1584,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">版本 <span class="req">*</span></label>
-          <input class="form-control" type="text" id="reusable-create-version" placeholder="如 2.5.0" />
+          <select class="form-control" id="reusable-create-version"><option value="">请选择</option><option value="2.5.0">2.5.0</option><option value="2.4.0">2.4.0</option><option value="2.3.0">2.3.0</option><option value="2.2.0">2.2.0</option><option value="2.1.0">2.1.0</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -1275,8 +1596,13 @@
         </div>
         <div class="form-group">
           <label class="form-label">可兑换次数上限</label>
-          <input class="form-control" type="number" id="reusable-create-max-usage" min="1" placeholder="留空表示不限" />
-          <div class="form-hint">达到上限后任何人均无法兑换</div>
+          <input class="form-control" type="number" id="reusable-create-max-usage" min="0" placeholder="填 0 表示不限" oninput="updateReusableCreateEst()" />
+          <div class="form-hint">填 0 表示不限制；达到上限后任何人均无法兑换</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">预计生成价值（自动）</label>
+          <input class="form-control" type="text" id="reusable-create-est-value" value="约 ¥0.00 元" disabled />
+          <div class="form-hint">可兑换次数不为 0 时按「单码价值 × 可兑换次数」自动计算</div>
         </div>
       </div>
       <div class="form-group">
@@ -1296,7 +1622,12 @@
       </div>
       <div class="form-group">
         <label class="form-label">单码价值（自动）</label>
-        <input class="form-control" type="text" value="约 ¥0.00 元" disabled />
+        <input class="form-control" type="text" id="reusable-create-unit-value" value="约 ¥0.00 元" disabled />
+      </div>
+      <div class="form-group" style="background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 12px">
+        <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">汇总</div>
+        <div style="font-size:13px;font-weight:600">预计生成价值：<span id="reusable-create-summary-val">—</span></div>
+        <div class="form-hint" style="margin-top:4px;margin-bottom:0">可兑换次数为 0 时显示「不限」</div>
       </div>
       <div class="form-group">
         <label class="form-label">用途 <span class="req">*</span></label>
@@ -1364,8 +1695,10 @@
           <div><span style="color:var(--text-tertiary)">兑换码口令：</span><code style="background:#f0f2f5;padding:1px 6px;border-radius:3px">SPRING2026</code></div>
           <div><span style="color:var(--text-tertiary)">单码价值：</span><span style="font-weight:600">约 ¥50.00 元</span></div>
           <div><span style="color:var(--text-tertiary)">可兑换次数上限：</span>10,000</div>
+          <div><span style="color:var(--text-tertiary)">预计生成价值：</span><span style="font-weight:600">约 ¥500,000 元</span></div>
           <div><span style="color:var(--text-tertiary)">用途：</span>免费活动 · 营销活动</div>
           <div style="grid-column:1/-1"><span style="color:var(--text-tertiary)">礼包配置：</span>金币×5,000 / 经验药水·大×10</div>
+          <div style="grid-column:1/-1;padding-top:8px;border-top:1px solid var(--border-light);margin-top:4px"><span style="color:var(--text-tertiary)">汇总：</span>预计生成价值 <strong>约 ¥500,000 元</strong></div>
         </div>
       </div>
       <!-- 可修改字段 -->
@@ -1380,7 +1713,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">版本 <span class="req">*</span></label>
-          <input class="form-control" type="text" id="reusable-edit-version" placeholder="如 2.5.0" value="2.5.0" />
+          <select class="form-control" id="reusable-edit-version"><option value="">请选择</option><option value="2.5.0" selected>2.5.0</option><option value="2.4.0">2.4.0</option><option value="2.3.0">2.3.0</option><option value="2.2.0">2.2.0</option><option value="2.1.0">2.1.0</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -1433,7 +1766,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">版本 <span class="req">*</span></label>
-          <input class="form-control" type="text" id="copy-reusable-version" placeholder="如 2.5.0" value="2.5.0" />
+          <select class="form-control" id="copy-reusable-version"><option value="">请选择</option><option value="2.5.0" selected>2.5.0</option><option value="2.4.0">2.4.0</option><option value="2.3.0">2.3.0</option><option value="2.2.0">2.2.0</option><option value="2.1.0">2.1.0</option></select>
         </div>
         <div class="form-group">
           <label class="form-label">开始时间 <span class="req">*</span></label>
@@ -1445,7 +1778,12 @@
         </div>
         <div class="form-group">
           <label class="form-label">可兑换次数上限</label>
-          <input class="form-control" type="number" id="copy-reusable-max-usage" value="10000" min="1" />
+          <input class="form-control" type="number" id="copy-reusable-max-usage" value="10000" min="0" placeholder="填 0 表示不限" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">预计生成价值（自动）</label>
+          <input class="form-control" type="text" id="copy-reusable-est-value" value="约 ¥500,000 元" disabled />
+          <div class="form-hint">可兑换次数不为 0 时按「单码价值 × 可兑换次数」自动计算</div>
         </div>
       </div>
       <div class="form-group">
@@ -1471,6 +1809,11 @@
       <div class="form-group">
         <label class="form-label">单码价值（自动）</label>
         <input class="form-control" type="text" value="约 ¥50.00 元" disabled />
+      </div>
+      <div class="form-group" style="background:var(--bg-secondary);border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 12px">
+        <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:4px">汇总</div>
+        <div style="font-size:13px;font-weight:600">预计生成价值：约 ¥500,000 元</div>
+        <div class="form-hint" style="margin-top:4px;margin-bottom:0">可兑换次数为 0 时显示「不限」</div>
       </div>
       <div class="form-group">
         <label class="form-label">用途 <span class="req">*</span></label>
@@ -1581,6 +1924,27 @@
   </div>
 </div>
 
+<!-- ===== MODAL: 道具批量上传 · 下载模板 / 上传文件 ===== -->
+<div class="modal-overlay" id="modal-items-upload">
+  <div class="modal" style="width:420px">
+    <div class="modal-header">
+      <div class="modal-title">道具批量上传</div>
+      <button class="modal-close" onclick="closeModal('modal-items-upload')" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--text-secondary);font-size:13px;margin-bottom:16px">请先下载模板，按模板填写道具信息后再上传。支持 .xlsx / .xls。</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="downloadItemsUploadTemplate()">
+          <iconify-icon icon="mdi:download-outline"></iconify-icon> 下载模板
+        </button>
+        <button class="btn btn-default" onclick="closeModal('modal-items-upload');document.getElementById('items-batch-upload-file').click()">
+          <iconify-icon icon="mdi:upload-outline"></iconify-icon> 上传文件
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== MODAL: 批量上传禁用/解禁 · 解析预览 ===== -->
 <div class="modal-overlay" id="modal-batch-preview">
   <div class="modal" style="width:480px">
@@ -1625,7 +1989,10 @@
       <button class="modal-close" onclick="closeModal('modal-batch-query-result')" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
     </div>
     <div class="modal-body">
-      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px" id="batch-query-result-stats">共查询 0 条</div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin-bottom:12px" id="batch-query-result-stats">
+        <span style="font-size:13px;color:var(--text-secondary)">共查询 <strong id="batch-query-total">0</strong> 条</span>
+        <span style="font-size:13px;color:var(--text-secondary)">其中 <span style="color:var(--error);font-weight:600" id="batch-query-disabled">0</span> 条已禁用，<span style="color:var(--success);font-weight:600" id="batch-query-normal">0</span> 条正常</span>
+      </div>
       <div class="table-wrap" style="max-height:360px;overflow-y:auto">
         <table>
           <thead>
@@ -1637,7 +2004,7 @@
         </table>
       </div>
       <div style="margin-top:14px;display:flex;gap:8px">
-        <button class="btn btn-default" onclick="toast('已导出查询结果 Excel','success')">
+        <button class="btn btn-default" id="batch-query-export-btn" onclick="exportBatchQueryResult()">
           <iconify-icon icon="mdi:download-outline"></iconify-icon> 导出结果
         </button>
       </div>
@@ -1668,10 +2035,12 @@
       </div>
       <div style="margin-bottom:14px">
         <label style="font-size:13px;color:var(--text-secondary);margin-right:6px">生成批次</label>
-        <select class="f-select" style="width:320px">
-          <option>批次 #1234【2026年2月28日 10:30 · Jay.zhu 生成】5,000 个</option>
-          <option>批次 #0891【2026年1月15日 09:10 · Jay.zhu 生成】2,000 个</option>
+        <select class="f-select" id="cv-batch-select" style="width:320px">
+          <option value="" selected>全部</option>
+          <option value="1234">批次 #1234【2026年2月28日 10:30 · Jay.zhu 生成】5,000 个</option>
+          <option value="0891">批次 #0891【2026年1月15日 09:10 · Jay.zhu 生成】2,000 个</option>
         </select>
+        <span style="font-size:12px;color:var(--text-tertiary);margin-left:8px">兑换列表不受批次筛选影响，始终展示本活动全部已兑换记录</span>
       </div>
       <!-- 统计卡片 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
@@ -2056,7 +2425,7 @@
   }
 
   // ===== NAV =====
-  const bcMap = { codes:'单人兑换码', reusable:'复用兑换码', cs:'单码查询', items:'道具管理' };
+  const bcMap = { codes:'单人兑换码', reusable:'复用兑换码', cs:'单码查询', items:'道具管理', approvers:'审批人配置', 'report-notify':'报表通知配置', 'bpm-ref':'审批流程页面样式参考', 'reusable-bpm-ref':'复用兑换码审批流程参考' };
   function nav(btn, id) {
     document.querySelectorAll('.sidebar-item').forEach(el => { el.classList.remove('active'); el.removeAttribute('aria-current'); });
     btn.classList.add('active'); btn.setAttribute('aria-current','page');
@@ -2065,6 +2434,28 @@
     document.getElementById('bc').textContent = bcMap[id] || id;
   }
   document.getElementById('bc').textContent = '单人兑换码';
+
+  var bpmDetailData = {
+    1: { title: '3月登录礼包', game: '幻境大陆', server: '全区', channel: '官方渠道', version: '2.5.0', start: '2026-03-01 00:00', end: '2026-03-31 23:59', limit: '1 次', cycle: '不限', exclude: '无', gift: '金币×1000，经验药水×5', value: '¥20.00 元', purpose: '免费活动 · 营销活动', genTime: '2026-03-06 10:30', qty: '5,000', thisVal: '¥100,000 元', historyVal: '¥200,000 元', totalVal: '¥300,000 元' },
+    2: { title: '2月留存活动', game: '幻境大陆', server: '全区', channel: '官方渠道', version: '2.5.0', start: '2026-02-01 00:00', end: '2026-02-28 23:59', limit: '1 次', cycle: '不限', exclude: '无', gift: '金币×800，药水×3', value: '¥20.00 元', purpose: '免费活动 · 营销活动', genTime: '2026-03-06 10:30', qty: '4,000', thisVal: '¥80,000 元', historyVal: '¥120,000 元', totalVal: '¥200,000 元' },
+    3: { title: 'KOL 合作码', game: '幻境大陆', server: '全区', channel: '合作渠道', version: '2.5.0', start: '2026-03-01 00:00', end: '2026-03-31 23:59', limit: '1 次', cycle: '不限', exclude: '无', gift: '钻石×100，装备箱×1', value: '¥20.00 元', purpose: '售卖 · KOL合作', genTime: '2026-03-06 10:30', qty: '3,000', thisVal: '¥60,000 元', historyVal: '¥0 元', totalVal: '¥60,000 元' }
+  };
+  function openBpmDetail(id) {
+    var d = bpmDetailData[id];
+    if (!d) return;
+    document.getElementById('bpm-detail-title').textContent = '活动详情 · ' + d.title;
+    var act = document.getElementById('bpm-detail-activity');
+    act.innerHTML = '<div class="bpm-field"><label>所属游戏</label><div class="value">' + d.game + '</div></div><div class="bpm-field"><label>区服</label><div class="value">' + d.server + '</div></div><div class="bpm-field"><label>渠道</label><div class="value">' + d.channel + '</div></div><div class="bpm-field"><label>版本</label><div class="value">' + d.version + '</div></div><div class="bpm-field"><label>开始时间</label><div class="value">' + d.start + '</div></div><div class="bpm-field"><label>结束时间</label><div class="value">' + d.end + '</div></div><div class="bpm-field"><label>每人兑换上限</label><div class="value">' + d.limit + '</div></div><div class="bpm-field"><label>循环周期</label><div class="value">' + d.cycle + '</div></div><div class="bpm-field"><label>单向排斥活动</label><div class="value">' + d.exclude + '</div></div><div class="bpm-field"><label>活动标题</label><div class="value">' + d.title + '</div></div><div class="bpm-field"><label>礼包配置</label><div class="value">' + d.gift + '</div></div><div class="bpm-field"><label>单码价值</label><div class="value">' + d.value + '</div></div><div class="bpm-field" style="grid-column:1/-1"><label>用途</label><div class="value">' + d.purpose + '</div></div>';
+    var gen = document.getElementById('bpm-detail-generate');
+    gen.innerHTML = '<div class="bpm-field"><label>生成时间</label><div class="value">' + d.genTime + '</div></div><div class="bpm-field"><label>本次生成个数</label><div class="value">' + d.qty + '</div></div><div class="bpm-field"><label>本次预计生成价值（商业化）</label><div class="value">' + d.thisVal + '</div></div><div class="bpm-field"><label>历史已生成价值</label><div class="value">' + d.historyVal + '</div></div><div class="bpm-field"><label>总计生成价值（商业化）</label><div class="value">' + d.totalVal + '</div></div>';
+    document.getElementById('modal-bpm-detail').classList.add('open');
+  }
+  function closeBpmDetail() {
+    document.getElementById('modal-bpm-detail').classList.remove('open');
+  }
+  document.getElementById('modal-bpm-detail').addEventListener('click', function(e) {
+    if (e.target === this) closeBpmDetail();
+  });
 
   // ===== TABS =====
   function switchTab(btn, id) {
@@ -2118,6 +2509,24 @@
     a.click();
     URL.revokeObjectURL(a.href);
     toast('模板已下载', 'success');
+  }
+
+  function downloadItemsUploadTemplate() {
+    var csv = '\uFEFF类型ID,类型名称,物品ID,物品名称,最大数量,价格（元）\nTYPE-001,货币,ITEM-1001,金币,99999,0.01\nTYPE-001,货币,ITEM-1002,钻石,99999,0.10';
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '道具批量上传参考模板.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('模板已下载', 'success');
+  }
+
+  function onItemsBatchFileSelected(ev) {
+    var input = ev.target;
+    var file = input.files && input.files[0];
+    if (file) toast('已选择文件：' + file.name + '，原型不解析', 'info');
+    input.value = '';
   }
 
   // ===== 批量上传禁用/解禁 · 解析预览与确认 =====
@@ -2183,23 +2592,50 @@
     }
   }
 
+  var _batchQueryResultRows = []; // 当前批量查询结果，供导出使用
+
   function confirmBatchQuery() {
     var tbody = document.getElementById('batch-query-result-tbody');
+    var rows = [
+      ['XFJM2A8K', '已激活', '未禁用', '3月登录礼包', '10234567', '剑客无情', '2026-02-15 14:23'],
+      ['XFJMT5NE', '已激活', '未禁用', '3月登录礼包', '10298834', '星辰若梦', '2026-02-16 09:41'],
+      ['XFJMV8CX', '已激活', '未禁用', '3月登录礼包', '10301122', '烈火骑士', '2026-02-17 20:08'],
+      ['XFJMR2HW', '未激活', '未禁用', '3月登录礼包', '—', '—', '—'],
+      ['XFJM9P3L', '未激活', '已禁用', '3月登录礼包', '—', '—', '—']
+    ];
+    _batchQueryResultRows = rows;
     if (tbody) {
-      var rows = [
-        ['XFJM2A8K', '已激活', '未禁用', '3月登录礼包', '10234567', '剑客无情', '2026-02-15 14:23'],
-        ['XFJMT5NE', '已激活', '未禁用', '3月登录礼包', '10298834', '星辰若梦', '2026-02-16 09:41'],
-        ['XFJMV8CX', '已激活', '未禁用', '3月登录礼包', '10301122', '烈火骑士', '2026-02-17 20:08'],
-        ['XFJMR2HW', '未激活', '未禁用', '3月登录礼包', '—', '—', '—'],
-        ['XFJM9P3L', '未激活', '已禁用', '3月登录礼包', '—', '—', '—']
-      ];
       tbody.innerHTML = rows.map(function(r) {
         return '<tr><td class="td-mono">' + r[0] + '</td><td><span class="badge ' + (r[1] === '已激活' ? 'badge-approved' : 'badge-draft') + '"><span class="badge-dot"></span>' + r[1] + '</span></td><td>' + r[2] + '</td><td>' + r[3] + '</td><td class="td-mono">' + r[4] + '</td><td>' + r[5] + '</td><td class="td-muted">' + r[6] + '</td></tr>';
       }).join('');
     }
-    var statsEl = document.getElementById('batch-query-result-stats');
-    if (statsEl) statsEl.textContent = '共查询 125 条，已激活 98 条，未激活 27 条';
+    var total = rows.length;
+    var disabledCount = rows.filter(function(r) { return r[2] === '已禁用'; }).length;
+    var normalCount = total - disabledCount;
+    var totalEl = document.getElementById('batch-query-total');
+    var disabledEl = document.getElementById('batch-query-disabled');
+    var normalEl = document.getElementById('batch-query-normal');
+    if (totalEl) totalEl.textContent = total;
+    if (disabledEl) disabledEl.textContent = disabledCount;
+    if (normalEl) normalEl.textContent = normalCount;
     openModal('modal-batch-query-result');
+  }
+
+  function exportBatchQueryResult() {
+    if (!_batchQueryResultRows || _batchQueryResultRows.length === 0) {
+      toast('暂无查询结果可导出', 'warning');
+      return;
+    }
+    var header = '\uFEFF兑换码,状态,禁用状态,所属活动,激活角色 ID,角色名,激活时间\n';
+    var body = _batchQueryResultRows.map(function(r) { return r.join(','); }).join('\n');
+    var csv = header + body;
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '批量查询结果_' + new Date().toISOString().slice(0, 10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    toast('已导出查询结果', 'success');
   }
 
   // 修改弹窗：根据状态控制锁定字段
@@ -2454,7 +2890,7 @@
     var channelEl = document.getElementById('create-channel');
     if (!channelEl || !channelEl.value.trim()) { toast('请选择渠道', 'error'); return; }
     var versionEl = document.getElementById('create-version');
-    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
+    if (!versionEl || !versionEl.value.trim()) { toast('请选择版本', 'error'); return; }
     var startEl = document.getElementById('create-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('create-end');
@@ -2531,7 +2967,7 @@
     var chEl = document.getElementById('copy-reusable-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
     var versionEl = document.getElementById('copy-reusable-version');
-    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
+    if (!versionEl || !versionEl.value.trim()) { toast('请选择版本', 'error'); return; }
     var startEl = document.getElementById('copy-reusable-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('copy-reusable-end');
@@ -2566,7 +3002,7 @@
     var chEl = document.getElementById('reusable-edit-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
     var versionEl = document.getElementById('reusable-edit-version');
-    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
+    if (!versionEl || !versionEl.value.trim()) { toast('请选择版本', 'error'); return; }
     var startEl = document.getElementById('reusable-edit-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('reusable-edit-end');
@@ -2581,7 +3017,7 @@
     var chEl = document.getElementById('edit-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
     var versionEl = document.getElementById('edit-version');
-    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
+    if (!versionEl || !versionEl.value.trim()) { toast('请选择版本', 'error'); return; }
     var startEl = document.getElementById('edit-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('edit-end');
@@ -2596,7 +3032,7 @@
     var chEl = document.getElementById('copy-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
     var versionEl = document.getElementById('copy-version');
-    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
+    if (!versionEl || !versionEl.value.trim()) { toast('请选择版本', 'error'); return; }
     var startEl = document.getElementById('copy-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('copy-end');
@@ -2615,6 +3051,39 @@
     toast('活动创建成功，可进行生成申请', 'success');
   }
 
+  function updateReusableCreateEst() {
+    var maxEl = document.getElementById('reusable-create-max-usage');
+    var estEl = document.getElementById('reusable-create-est-value');
+    var sumEl = document.getElementById('reusable-create-summary-val');
+    if (!estEl) return;
+    var maxVal = maxEl && maxEl.value !== '' ? parseInt(maxEl.value, 10) : NaN;
+    if (isNaN(maxVal)) {
+      estEl.value = '—';
+      if (sumEl) sumEl.textContent = '—';
+      return;
+    }
+    if (maxVal === 0) {
+      estEl.value = '不限';
+      if (sumEl) sumEl.textContent = '不限';
+      return;
+    }
+    if (maxVal < 0) {
+      estEl.value = '—';
+      if (sumEl) sumEl.textContent = '—';
+      return;
+    }
+    var unitEl = document.getElementById('reusable-create-unit-value');
+    var unit = 50;
+    if (unitEl && unitEl.value) {
+      var m = unitEl.value.match(/[\d.]+/);
+      if (m) unit = parseFloat(m[0]) || 50;
+    }
+    var total = unit * maxVal;
+    var s = '约 ¥' + (total >= 10000 ? (total / 10000).toFixed(0) + '万' : total.toLocaleString()) + ' 元';
+    estEl.value = s;
+    if (sumEl) sumEl.textContent = s;
+  }
+
   function submitReusableCreate() {
     var titleEl = document.getElementById('reusable-create-title');
     if (!titleEl || !titleEl.value.trim()) { toast('请输入活动标题', 'error'); return; }
@@ -2623,7 +3092,7 @@
     var chEl = document.getElementById('reusable-create-channel');
     if (!chEl || !chEl.value.trim()) { toast('请选择渠道', 'error'); return; }
     var versionEl = document.getElementById('reusable-create-version');
-    if (!versionEl || !versionEl.value.trim()) { toast('请输入版本', 'error'); return; }
+    if (!versionEl || !versionEl.value.trim()) { toast('请选择版本', 'error'); return; }
     var startEl = document.getElementById('reusable-create-start');
     if (!startEl || !startEl.value.trim()) { toast('请选择开始时间', 'error'); return; }
     var endEl = document.getElementById('reusable-create-end');
@@ -2648,6 +3117,7 @@
     if (!hasValidGift) { toast('请配置至少一道具及数量', 'error'); return; }
     var maxUsageEl = document.getElementById('reusable-create-max-usage');
     var maxUsage = maxUsageEl ? parseInt(maxUsageEl.value, 10) : 0;
+    if (isNaN(maxUsage)) maxUsage = 0;
     closeModal('modal-reusable-create');
     toast('复用兑换码活动已提交飞书审批，请留意审批通知', 'success');
   }
@@ -2766,10 +3236,11 @@
         <div class="info-row"><div class="info-label">活动标题</div><div class="info-value">春节直播专属</div></div>
         <div class="info-row"><div class="info-label">兑换码口令</div><div class="info-value"><code style="background:#f0f2f5;padding:2px 6px;border-radius:3px">SPRING2026</code></div></div>
         <div class="info-row"><div class="info-label">渠道</div><div class="info-value">官方渠道</div></div>
+        <div class="info-row"><div class="info-label">版本</div><div class="info-value">2.5.0</div></div>
         <div class="info-row"><div class="info-label">开始时间</div><div class="info-value" style="font-variant-numeric:tabular-nums">2026-02-01 00:00</div></div>
         <div class="info-row"><div class="info-label">结束时间</div><div class="info-value" style="font-variant-numeric:tabular-nums">2026-02-28 23:59</div></div>
         <div class="info-row"><div class="info-label">可兑换次数上限</div><div class="info-value">10,000</div></div>
-        <div class="info-row"><div class="info-label">已兑换次数</div><div class="info-value" style="color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums">6,823</div></div>
+        <div class="info-row"><div class="info-label">预计生成价值</div><div class="info-value" style="font-weight:600">约 ¥500,000 元</div></div>
         <div class="info-row" style="align-items:flex-start"><div class="info-label" style="padding-top:2px">礼包配置</div><div class="info-value">
           <table class="gift-table" style="margin:-2px 0">
             <thead><tr><th>道具名称</th><th>数量</th><th>单价</th><th>小计</th></tr></thead>
@@ -2780,7 +3251,10 @@
           </table>
         </div></div>
         <div class="info-row"><div class="info-label">单码价值（自动）</div><div class="info-value">约 ¥50.00 元</div></div>
+        <div class="info-row"><div class="info-label">用途</div><div class="info-value">免费活动 · 营销活动</div></div>
         <div class="info-row"><div class="info-label">备注</div><div class="info-value" style="color:var(--text-tertiary)">直播引流</div></div>
+        <div class="drawer-section" style="margin-top:16px">统计（仅查看）</div>
+        <div class="info-row"><div class="info-label">已兑换次数</div><div class="info-value" style="color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums">6,823</div></div>
         <div class="drawer-section" style="margin-top:20px">兑换日志</div>
         <div style="display:flex;gap:8px;margin-bottom:10px">
           <input class="f-input" type="text" placeholder="角色 ID 筛选…" style="width:160px;height:28px;font-size:12.5px" />
