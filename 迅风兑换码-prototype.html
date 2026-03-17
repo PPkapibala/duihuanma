@@ -924,55 +924,31 @@
     <div class="page" id="page-approvers">
       <div class="card">
         <div class="card-header">
-          <div class="card-title"><iconify-icon icon="mdi:account-check-outline"></iconify-icon> 项目审批人配置</div>
+          <div class="card-title"><iconify-icon icon="mdi:account-check-outline"></iconify-icon> 审批人配置</div>
         </div>
         <div class="card-body">
-          <p style="color:var(--text-tertiary);font-size:13px;margin-bottom:18px">配置一级、二级审批人，每级可配置多名人员，同级多人之间为<strong>或</strong>的关系（任一通过即可）。发起 BPM 审批时将按此配置匹配审批人（可同步至飞书审批流）。</p>
+          <p style="color:var(--text-tertiary);font-size:13px;margin-bottom:8px">本页维护<strong>一级、二级</strong>审批人，每行对应一个层级。</p>
+          <p style="color:var(--text-tertiary);font-size:13px;margin-bottom:12px">人员列为飞书英文名（手动填写），同一层级可配置多人，多人为<strong>或签</strong>（任一人通过即通过该层级）。配置后 BPM 审批将按此路由，可与飞书审批流同步。</p>
+          <p style="color:var(--text-tertiary);font-size:12px;margin-bottom:14px">点击操作列「编辑」可维护该层级人员名单（增删改）；同一层级多人按或签处理。</p>
 
-          <div class="form-group" style="margin-bottom:20px">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-              <label class="form-label" style="margin:0">一级审批人</label>
-              <button class="btn btn-default" onclick="toast('新增一级审批人','info')"><iconify-icon icon="mdi:plus"></iconify-icon> 新增</button>
-            </div>
-            <p style="color:var(--text-tertiary);font-size:12px;margin-bottom:8px">可配置多名，多人之间为或的关系（任一通过即可）</p>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr><th>审批人</th><th>飞书 user_id / 工号</th><th>备注</th><th>操作</th></tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>张三</td><td class="td-mono">ou_xxx</td><td style="color:var(--text-tertiary)">—</td>
-                    <td><button class="btn-text" onclick="toast('修改','info')">修改</button> <button class="btn-text danger" onclick="toast('删除','info')">删除</button></td>
-                  </tr>
-                  <tr>
-                    <td>李四</td><td class="td-mono">ou_yyy</td><td style="color:var(--text-tertiary)">—</td>
-                    <td><button class="btn-text" onclick="toast('修改','info')">修改</button> <button class="btn-text danger" onclick="toast('删除','info')">删除</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-              <label class="form-label" style="margin:0">二级审批人</label>
-              <button class="btn btn-default" onclick="toast('新增二级审批人','info')"><iconify-icon icon="mdi:plus"></iconify-icon> 新增</button>
-            </div>
-            <p style="color:var(--text-tertiary);font-size:12px;margin-bottom:8px">可配置多名，多人之间为或的关系（任一通过即可）</p>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr><th>审批人</th><th>飞书 user_id / 工号</th><th>备注</th><th>操作</th></tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>王五</td><td class="td-mono">ou_zzz</td><td style="color:var(--text-tertiary)">—</td>
-                    <td><button class="btn-text" onclick="toast('修改','info')">修改</button> <button class="btn-text danger" onclick="toast('删除','info')">删除</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>角色</th><th>人员</th><th>操作</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>一级审批人</td>
+                  <td><span class="td-mono">Jay.zhu</span>、<span class="td-mono">May.liu</span></td>
+                  <td><button class="btn-text" onclick="openApproversEditModal('一级审批人', ['Jay.zhu','May.liu'])">编辑</button></td>
+                </tr>
+                <tr>
+                  <td>二级审批人</td>
+                  <td><span class="td-mono">Admin</span></td>
+                  <td><button class="btn-text" onclick="openApproversEditModal('二级审批人', ['Admin'])">编辑</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -1468,6 +1444,33 @@
       <button class="btn btn-primary" id="gen-submit" onclick="submitGenerate()">
         <iconify-icon icon="mdi:send-outline"></iconify-icon> 提交审批
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: 编辑审批人（一级/二级）===== -->
+<div class="modal-overlay" id="modal-approvers-edit">
+  <div class="modal" style="width:420px">
+    <div class="modal-header">
+      <div class="modal-title" id="approvers-edit-title">编辑一级审批人</div>
+      <button class="modal-close" onclick="closeModal('modal-approvers-edit')" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
+    </div>
+    <div class="modal-body">
+      <p style="color:var(--text-tertiary);font-size:12px;margin-bottom:12px">同一层级多人为或签。飞书英文名，手动填写。</p>
+      <div class="table-wrap" style="margin-bottom:12px">
+        <table>
+          <thead><tr><th>飞书英文名</th><th>操作</th></tr></thead>
+          <tbody id="approvers-edit-list"></tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input class="form-control" type="text" id="approvers-edit-new-name" placeholder="输入飞书英文名" style="width:140px" />
+        <button type="button" class="btn btn-default" onclick="approversEditAddRow()"><iconify-icon icon="mdi:plus"></iconify-icon> 新增一条</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default" onclick="closeModal('modal-approvers-edit')">取消</button>
+      <button class="btn btn-primary" onclick="saveApproversEdit()">保存</button>
     </div>
   </div>
 </div>
@@ -2475,6 +2478,52 @@
     el.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
+
+  // ===== 审批人配置：编辑弹窗 =====
+  var _approversEditRole = '';
+  var _approversEditNames = [];
+  function openApproversEditModal(roleLabel, namesArray) {
+    _approversEditRole = roleLabel;
+    _approversEditNames = (namesArray || []).slice();
+    document.getElementById('approvers-edit-title').textContent = '编辑' + roleLabel;
+    document.getElementById('approvers-edit-new-name').value = '';
+    renderApproversEditList();
+    openModal('modal-approvers-edit');
+  }
+  function renderApproversEditList() {
+    var tbody = document.getElementById('approvers-edit-list');
+    tbody.innerHTML = _approversEditNames.map(function(name, i) {
+      return '<tr><td class="td-mono">' + (name || '—') + '</td><td><button type="button" class="btn-text" onclick="approversEditChangeRow(' + i + ')">修改</button> <button type="button" class="btn-text danger" onclick="approversEditRemoveRow(' + i + ')">删除</button></td></tr>';
+    }).join('');
+  }
+  function approversEditAddRow() {
+    var input = document.getElementById('approvers-edit-new-name');
+    var name = (input.value || '').trim();
+    if (name) {
+      _approversEditNames.push(name);
+      input.value = '';
+      renderApproversEditList();
+    } else {
+      toast('请输入飞书英文名', 'warning');
+    }
+  }
+  function approversEditRemoveRow(index) {
+    _approversEditNames.splice(index, 1);
+    renderApproversEditList();
+  }
+  function approversEditChangeRow(index) {
+    var name = _approversEditNames[index];
+    var newName = window.prompt('飞书英文名', name || '');
+    if (newName != null && (newName = newName.trim())) {
+      _approversEditNames[index] = newName;
+      renderApproversEditList();
+    }
+  }
+  function saveApproversEdit() {
+    toast('已保存，审批人配置已更新', 'success');
+    closeModal('modal-approvers-edit');
+  }
+
   function closeModal(id) {
     const el = document.getElementById(id);
     if (!el) return;
