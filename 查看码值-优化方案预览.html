@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>查看码值 · 优化方案预览</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap&font-display=swap" rel="stylesheet" />
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <style>
+    :root {
+      --bg-base: #f0f2f5;
+      --bg-surface: #ffffff;
+      --primary: #1677ff;
+      --primary-hover: #0958d9;
+      --success: #52c41a;
+      --warning: #faad14;
+      --error: #ff4d4f;
+      --text-primary: #1d2129;
+      --text-secondary: #4e5969;
+      --text-tertiary: #86909c;
+      --border: #e5e6eb;
+      --border-light: #f2f3f5;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+      --radius: 6px;
+      --radius-lg: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans SC', system-ui, sans-serif; background: var(--bg-base); color: var(--text-primary); font-size: 14px; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 24px; }
+
+    .scenario-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg-surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      padding: 14px 24px; margin-bottom: 20px; width: 100%; max-width: 880px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .scenario-bar .label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+    .scenario-toggle {
+      display: inline-flex; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);
+    }
+    .scenario-toggle button {
+      padding: 6px 16px; border: none; background: var(--bg-surface); cursor: pointer;
+      font-size: 13px; font-weight: 500; color: var(--text-secondary); font-family: inherit;
+      transition: background 120ms, color 120ms;
+    }
+    .scenario-toggle button:not(:last-child) { border-right: 1px solid var(--border); }
+    .scenario-toggle button:hover { background: #e8f3ff; color: var(--primary); }
+    .scenario-toggle button.active { background: var(--primary); color: #fff; }
+    .scenario-hint {
+      font-size: 12px; color: var(--text-tertiary); margin-left: auto;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .scenario-hint iconify-icon { font-size: 14px; color: var(--warning); }
+
+    .comparison { display: flex; gap: 20px; width: 100%; max-width: 1800px; align-items: flex-start; }
+    .panel { flex: 1; min-width: 0; }
+    .panel-label {
+      font-size: 14px; font-weight: 700; text-align: center; margin-bottom: 10px;
+      padding: 8px 16px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .panel-label.original { background: #f0f2f5; color: var(--text-secondary); }
+    .panel-label.improved { background: #e8f3ff; color: var(--primary); }
+    .panel-label iconify-icon { font-size: 15px; }
+
+    .modal-box {
+      background: var(--bg-surface); border-radius: var(--radius-lg);
+      box-shadow: 0 8px 40px rgba(0,0,0,.12); overflow: hidden;
+    }
+    .modal-header {
+      padding: 17px 22px 13px; border-bottom: 1px solid var(--border-light);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-title { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .modal-close {
+      background: none; border: none; cursor: pointer; color: var(--text-tertiary);
+      font-size: 18px; display: flex; align-items: center; padding: 3px; border-radius: 4px;
+    }
+    .modal-body { padding: 18px 22px; padding-bottom: 0; }
+    .modal-footer {
+      padding: 13px 22px 17px; border-top: 1px solid var(--border-light);
+      display: flex; justify-content: flex-end; gap: 8px;
+    }
+
+    .f-input, .f-select {
+      height: 30px; padding: 0 9px; border: 1px solid var(--border); border-radius: var(--radius);
+      font-size: 13px; color: var(--text-primary); background: var(--bg-surface); outline: none;
+      font-family: inherit; transition: border-color 120ms, box-shadow 120ms;
+    }
+    .f-input:focus, .f-select:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(22,119,255,.15); }
+    .f-select { cursor: pointer; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 5px; padding: 0 13px; height: 30px;
+      border-radius: var(--radius); font-size: 13px; font-weight: 500; cursor: pointer;
+      border: 1px solid transparent; font-family: inherit; white-space: nowrap;
+      transition: background-color 120ms, border-color 120ms;
+    }
+    .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+    .btn-default { background: var(--bg-surface); color: var(--text-primary); border-color: var(--border); }
+    .btn-default:hover { border-color: var(--primary); color: var(--primary); }
+
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .badge-approved { background: #f6ffed; color: #389e0d; } .badge-approved .badge-dot { background: #52c41a; }
+    .badge-draft { background: #f0f2f5; color: #4e5969; } .badge-draft .badge-dot { background: #86909c; }
+    .badge-rejected { background: #fff1f0; color: #cf1322; } .badge-rejected .badge-dot { background: #cf1322; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead tr { background: #fafafa; }
+    th { padding: 9px 10px; text-align: left; font-weight: 600; color: var(--text-secondary); border-bottom: 1px solid var(--border); white-space: nowrap; font-size: 12.5px; }
+    td { padding: 10px 10px; border-bottom: 1px solid var(--border-light); color: var(--text-primary); vertical-align: middle; font-size: 12.5px; }
+    tr:last-child td { border-bottom: none; }
+    tbody tr { transition: background-color 100ms; }
+    tbody tr:hover { background: #f7f8fa; }
+    .td-muted { font-size: 12px; color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+    code.code-val { background: #f0f2f5; padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+
+    .tab-btn {
+      padding: 8px 18px; border: none; background: none; cursor: pointer;
+      font-size: 13.5px; font-weight: 500; color: var(--text-secondary);
+      border-bottom: 2px solid transparent; font-family: inherit;
+      transition: color 120ms, border-color 120ms;
+    }
+    .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; }
+    .tab-btn.disabled {
+      color: var(--text-tertiary); cursor: not-allowed; opacity: 0.55;
+    }
+    .tab-badge-perm {
+      font-size: 11px; padding: 1px 6px; border-radius: 8px; margin-left: 4px; font-weight: 500;
+    }
+    .perm-owner { background: #fff2e8; color: #d46b08; }
+    .perm-all { background: #f0f9ff; color: #0958d9; }
+    .perm-locked { background: #f0f2f5; color: #86909c; }
+
+    .pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border-light);
+    }
+    .pagination .total { font-size: 12px; color: var(--text-tertiary); }
+    .page-btns { display: flex; align-items: center; gap: 4px; }
+    .page-btn {
+      padding: 4px 10px; font-size: 12px; min-width: 0; border-radius: var(--radius);
+      border: 1px solid var(--border); background: var(--bg-surface); cursor: pointer;
+      font-family: inherit; color: var(--text-secondary); transition: 120ms;
+    }
+    .page-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .page-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+    .no-permission-tip {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 40px 20px; color: var(--text-tertiary); text-align: center;
+    }
+    .no-permission-tip iconify-icon { font-size: 42px; margin-bottom: 10px; opacity: 0.3; }
+    .no-permission-tip .tip-main { font-size: 13.5px; font-weight: 500; color: var(--text-secondary); margin-bottom: 4px; }
+    .no-permission-tip .tip-sub { font-size: 12px; color: var(--text-tertiary); }
+
+    .change-tag {
+      position: absolute; font-size: 10px; font-weight: 600; color: #fff;
+      background: #fa541c; padding: 1px 6px; border-radius: 4px; white-space: nowrap;
+      pointer-events: none; z-index: 10; line-height: 1.5;
+    }
+
+    .diff-highlight { position: relative; }
+    .diff-highlight::before {
+      content: ''; position: absolute; inset: -3px;
+      border: 2px dashed #fa541c; border-radius: var(--radius); pointer-events: none; z-index: 5;
+    }
+
+    .annotation {
+      background: #fffbe6; border: 1px solid #ffe58f; border-radius: var(--radius);
+      padding: 8px 12px; font-size: 12.5px; color: #7c5800; margin-top: 10px;
+      display: flex; align-items: flex-start; gap: 6px;
+    }
+    .annotation iconify-icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+    @media (max-width: 1200px) {
+      .comparison { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 场景切换栏 -->
+<div class="scenario-bar">
+  <span class="label">当前登录用户：</span>
+  <div class="scenario-toggle" id="userToggle">
+    <button class="active" onclick="switchUser('jay')">Jay.zhu（生成人本人）</button>
+    <button onclick="switchUser('gali')">Gali.hao（其他运营）</button>
+    <button onclick="switchUser('cs')">小王（客服角色）</button>
+  </div>
+  <span class="scenario-hint">
+    <iconify-icon icon="mdi:information-outline"></iconify-icon>
+    切换用户查看不同角色看到的弹窗效果
+  </span>
+</div>
+
+<div class="comparison">
+  <!-- ====== 左侧：原始方案 ====== -->
+  <div class="panel">
+    <div class="panel-label original">
+      <iconify-icon icon="mdi:file-document-outline"></iconify-icon> 原始方案
+    </div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title"><iconify-icon icon="mdi:ticket-outline" style="font-size:15px"></iconify-icon> 兑换码 · 3月登录礼包</div>
+        <button class="modal-close" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
+      </div>
+      <div class="modal-body">
+        <!-- 筛选区 -->
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+          <input class="f-input" type="text" placeholder="兑换码" style="width:130px" />
+          <input class="f-input" type="text" placeholder="生成时间 起" style="width:110px" />
+          <span style="color:var(--text-tertiary);font-size:13px">–</span>
+          <input class="f-input" type="text" placeholder="生成时间 止" style="width:110px" />
+          <select class="f-select" style="width:100px"><option value="">全部禁用状态</option><option>未禁用</option><option>已禁用</option></select>
+          <button class="btn btn-primary"><iconify-icon icon="mdi:magnify"></iconify-icon> 查询</button>
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="font-size:13px;color:var(--text-secondary);margin-right:6px">生成批次</label>
+          <select class="f-select" style="width:300px">
+            <option value="" selected>全部</option>
+            <option value="1234">批次 #1234【2026-02-28 10:30 · Jay.zhu】5,000 个</option>
+            <option value="0891">批次 #0891【2026-01-15 09:10 · Gali.hao】2,000 个</option>
+          </select>
+          <div style="font-size:11px;color:var(--text-tertiary);margin-top:4px">兑换列表不受批次筛选影响，始终展示本活动全部已兑换记录</div>
+        </div>
+        <!-- 统计卡片 - 原始 -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;position:relative">
+          <div style="background:#f0f9ff;border:1px solid #bae0ff;border-radius:var(--radius);padding:12px 16px">
+            <div style="font-size:12px;color:#0958d9;margin-bottom:4px">兑换码总数量</div>
+            <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#003eb3" id="old-total">5,000</div>
+          </div>
+          <div style="background:#f6ffed;border:1px solid #b7eb8f;border-radius:var(--radius);padding:12px 16px">
+            <div style="font-size:12px;color:#389e0d;margin-bottom:4px">已兑换数量</div>
+            <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#237804">3,412</div>
+          </div>
+        </div>
+        <!-- 下载日志 -->
+        <div style="background:#fafafa;border:1px solid var(--border-light);border-radius:var(--radius);padding:9px 12px;margin-bottom:14px;font-size:12px">
+          <div style="font-weight:600;color:var(--text-secondary);margin-bottom:5px;display:flex;align-items:center;gap:5px">
+            <iconify-icon icon="mdi:download-circle-outline"></iconify-icon> 下载日志
+            <span style="font-size:11px;color:var(--text-tertiary);font-weight:400">（所有运营可见）</span>
+          </div>
+          <div style="display:flex;gap:20px;color:var(--text-tertiary);font-size:11.5px">
+            <span>2026-02-28 11:05 · Jay.zhu · 下载未兑换列表</span>
+            <span>2026-02-20 14:32 · Gali.hao · 下载兑换列表</span>
+          </div>
+        </div>
+        <!-- Tab 切换 - 原始 -->
+        <div style="border-bottom:1px solid var(--border);margin:0 -22px;padding:0 22px">
+          <div style="display:flex;gap:0">
+            <button class="tab-btn active" id="old-tab-all" onclick="switchOldTab('all')">
+              全部 <span class="tab-badge-perm perm-owner">仅生成人可见</span>
+            </button>
+            <button class="tab-btn" id="old-tab-inactive" onclick="switchOldTab('inactive')">
+              未兑换列表 <span class="tab-badge-perm perm-owner">仅生成人可见</span>
+            </button>
+            <button class="tab-btn" id="old-tab-active" onclick="switchOldTab('active')">
+              兑换列表 <span class="tab-badge-perm perm-all">所有运营</span>
+            </button>
+          </div>
+        </div>
+        <!-- 原始 Tab 内容 -->
+        <div id="old-panel-all" style="padding-top:12px">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
+            <button class="btn btn-default"><iconify-icon icon="mdi:download-outline"></iconify-icon> 下载 Excel</button>
+          </div>
+          <div style="max-height:200px;overflow-y:auto">
+            <table>
+              <thead><tr><th>兑换码</th><th>状态</th><th>禁用状态</th><th>生成时间</th><th>生成人</th><th>角色ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
+              <tbody id="old-tbody-all"></tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <span class="total" id="old-page-total-all">共 5,000 条</span>
+            <div class="page-btns">
+              <button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button>
+              <span style="font-size:12px;color:var(--text-tertiary)">…</span>
+              <button class="page-btn">500</button>
+              <span style="font-size:12px;color:var(--text-secondary);margin-left:8px">每页 10 条</span>
+            </div>
+          </div>
+        </div>
+        <div id="old-panel-inactive" style="display:none;padding-top:12px">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
+            <button class="btn btn-default"><iconify-icon icon="mdi:download-outline"></iconify-icon> 下载 Excel</button>
+          </div>
+          <div style="max-height:200px;overflow-y:auto">
+            <table>
+              <thead><tr><th>兑换码</th><th>状态</th><th>禁用状态</th><th>生成时间</th><th>生成人</th><th>角色ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
+              <tbody id="old-tbody-inactive"></tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <span class="total">共 1,588 条</span>
+            <div class="page-btns">
+              <button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button>
+              <span style="font-size:12px;color:var(--text-tertiary)">…</span>
+              <button class="page-btn">159</button>
+              <span style="font-size:12px;color:var(--text-secondary);margin-left:8px">每页 10 条</span>
+            </div>
+          </div>
+        </div>
+        <div id="old-panel-active" style="display:none;padding-top:12px">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
+            <button class="btn btn-default"><iconify-icon icon="mdi:download-outline"></iconify-icon> 下载 Excel</button>
+          </div>
+          <div style="max-height:200px;overflow-y:auto">
+            <table>
+              <thead><tr><th>兑换码</th><th>状态</th><th>禁用状态</th><th>生成时间</th><th>生成人</th><th>角色ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
+              <tbody id="old-tbody-active"></tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <span class="total">共 3,412 条</span>
+            <div class="page-btns">
+              <button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button>
+              <span style="font-size:12px;color:var(--text-tertiary)">…</span>
+              <button class="page-btn">342</button>
+              <span style="font-size:12px;color:var(--text-secondary);margin-left:8px">每页 10 条</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default">关闭</button>
+      </div>
+    </div>
+    <!-- 原始方案问题标注 -->
+    <div class="annotation" id="old-annotation">
+      <iconify-icon icon="mdi:alert-circle-outline"></iconify-icon>
+      <div id="old-annotation-text">
+        <strong>当前：</strong>Jay.zhu 是生成人，可见全部 Tab 和数据。体验正常。<br/>
+        <strong>问题：</strong>切换到其他用户查看，统计区仍显示 5,000 总量，但「全部」「未兑换列表」Tab 对非生成人应不可见——用户会困惑为什么统计数字与可见数据不匹配。
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 右侧：优化方案 ====== -->
+  <div class="panel">
+    <div class="panel-label improved">
+      <iconify-icon icon="mdi:lightbulb-on-outline"></iconify-icon> 优化方案
+    </div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title"><iconify-icon icon="mdi:ticket-outline" style="font-size:15px"></iconify-icon> 兑换码 · 3月登录礼包</div>
+        <button class="modal-close" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
+      </div>
+      <div class="modal-body">
+        <!-- 统计卡片（Tab 之上，始终可见） -->
+        <div id="new-stats-area" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+          <div style="background:#f0f9ff;border:1px solid #bae0ff;border-radius:var(--radius);padding:12px 16px">
+            <div style="font-size:12px;color:#0958d9;margin-bottom:4px;display:flex;align-items:center;gap:4px">
+              <iconify-icon icon="mdi:sigma" style="font-size:13px"></iconify-icon> 活动总码量
+            </div>
+            <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#003eb3">7,000</div>
+            <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px">所有批次汇总</div>
+          </div>
+          <div id="new-stat-mine" style="background:#f0f5ff;border:1px solid #adc6ff;border-radius:var(--radius);padding:12px 16px">
+            <div style="font-size:12px;color:#1d39c4;margin-bottom:4px;display:flex;align-items:center;gap:4px">
+              <iconify-icon icon="mdi:account-outline" style="font-size:13px"></iconify-icon> <span id="new-stat-mine-label">我的生成量</span>
+            </div>
+            <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#10239e" id="new-stat-mine-value">5,000</div>
+            <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px" id="new-stat-mine-sub">与「我的全部」「我的未兑换」Tab 数据一致</div>
+          </div>
+          <div style="background:#f6ffed;border:1px solid #b7eb8f;border-radius:var(--radius);padding:12px 16px">
+            <div style="font-size:12px;color:#389e0d;margin-bottom:4px;display:flex;align-items:center;gap:4px">
+              <iconify-icon icon="mdi:check-circle-outline" style="font-size:13px"></iconify-icon> 已兑换数量
+            </div>
+            <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#237804">4,812</div>
+            <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px">活动全部已兑换</div>
+          </div>
+        </div>
+        <!-- 生成记录概览（所有运营/客服可见，不暴露码值明细） -->
+        <div id="new-batch-overview" style="margin-bottom:14px"></div>
+        <!-- 下载日志（Tab 之上，始终可见） -->
+        <div style="background:#fafafa;border:1px solid var(--border-light);border-radius:var(--radius);padding:9px 12px;margin-bottom:14px;font-size:12px">
+          <div style="font-weight:600;color:var(--text-secondary);margin-bottom:5px;display:flex;align-items:center;gap:5px">
+            <iconify-icon icon="mdi:download-circle-outline"></iconify-icon> 下载日志
+            <span style="font-size:11px;color:var(--text-tertiary);font-weight:400">（所有运营可见，用于审计追溯）</span>
+          </div>
+          <div style="display:flex;gap:20px;color:var(--text-tertiary);font-size:11.5px">
+            <span>2026-02-28 11:05 · Jay.zhu · 下载未兑换列表</span>
+            <span>2026-02-20 14:32 · Gali.hao · 下载兑换列表</span>
+          </div>
+        </div>
+        <!-- Tab 切换 -->
+        <div style="border-bottom:1px solid var(--border);margin:0 -22px;padding:0 22px">
+          <div style="display:flex;gap:0" id="new-tabs"></div>
+        </div>
+        <!-- Tab 内容（筛选条件在各自 Tab 面板内部） -->
+        <div id="new-panel-all" style="padding-top:12px"></div>
+        <div id="new-panel-inactive" style="display:none;padding-top:12px"></div>
+        <div id="new-panel-active" style="display:none;padding-top:12px"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default">关闭</button>
+      </div>
+    </div>
+    <!-- 优化方案说明 -->
+    <div class="annotation" style="background:#f0f9ff;border-color:#91caff;color:#003eb3">
+      <iconify-icon icon="mdi:check-decagram" style="color:#0958d9"></iconify-icon>
+      <div id="new-annotation-text">
+        <strong>优化点：</strong><br/>
+        ① <strong>Tab 重命名</strong>：「我的全部」「我的未兑换」「全部已兑换」，通过命名直接传达权限归属<br/>
+        ② <strong>三列统计卡片</strong>：「活动总码量」「我的生成量」「已兑换数量」分层展示，数字与可见数据始终一致<br/>
+        ③ <strong>生成记录概览</strong>：所有人可见，按批次展示聚合统计（已兑换/未兑换/已禁用），不暴露码值明细，支持折叠，非生成人可「联系」生成人<br/>
+        ④ <strong>筛选条件下沉至 Tab 内</strong>：每个 Tab 拥有自己的筛选区，互不干扰<br/>
+        ⑤ <strong>非生成人 Tab 状态</strong>：Tab 保持可见但置灰 + 锁图标，点击后展示友好的权限说明
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var currentUser = 'jay';
+
+var mockData = {
+  jay: [
+    { code:'XFJM2A8K', status:'activated', disabled:false, time:'2026-02-28 10:30:01', gen:'Jay.zhu', rid:'10234567', rname:'剑客无情', ch:'官方渠道', atime:'2026-02-15 14:23' },
+    { code:'XFJMT5NE', status:'activated', disabled:false, time:'2026-02-28 10:30:01', gen:'Jay.zhu', rid:'10298834', rname:'星辰若梦', ch:'飞书渠道', atime:'2026-02-16 09:41' },
+    { code:'XFJM9P3L', status:'inactive',  disabled:false, time:'2026-02-28 10:30:01', gen:'Jay.zhu', rid:'', rname:'', ch:'', atime:'' },
+    { code:'XFJM4K7Q', status:'inactive',  disabled:true,  time:'2026-02-28 10:30:01', gen:'Jay.zhu', rid:'', rname:'', ch:'', atime:'' },
+    { code:'XFJMV8CX', status:'activated', disabled:false, time:'2026-02-28 10:30:02', gen:'Jay.zhu', rid:'10301122', rname:'烈火骑士', ch:'官方渠道', atime:'2026-02-17 20:08' },
+    { code:'XFJMR2HW', status:'inactive',  disabled:false, time:'2026-02-28 10:30:02', gen:'Jay.zhu', rid:'', rname:'', ch:'', atime:'' },
+    { code:'XFJM6DBA', status:'inactive',  disabled:false, time:'2026-02-28 10:30:02', gen:'Jay.zhu', rid:'', rname:'', ch:'', atime:'' },
+  ],
+  activated: [
+    { code:'XFJM2A8K', status:'activated', disabled:false, time:'2026-02-28 10:30:01', gen:'Jay.zhu', rid:'10234567', rname:'剑客无情', ch:'官方渠道', atime:'2026-02-15 14:23' },
+    { code:'XFJMT5NE', status:'activated', disabled:false, time:'2026-02-28 10:30:01', gen:'Jay.zhu', rid:'10298834', rname:'星辰若梦', ch:'飞书渠道', atime:'2026-02-16 09:41' },
+    { code:'XFJMV8CX', status:'activated', disabled:false, time:'2026-02-28 10:30:02', gen:'Jay.zhu', rid:'10301122', rname:'烈火骑士', ch:'官方渠道', atime:'2026-02-17 20:08' },
+    { code:'XFJM8HYZ', status:'activated', disabled:false, time:'2026-01-15 09:10:01', gen:'Gali.hao', rid:'10455678', rname:'月影幻光', ch:'官方渠道', atime:'2026-01-20 18:30' },
+    { code:'XFJM3WRK', status:'activated', disabled:false, time:'2026-01-15 09:10:01', gen:'Gali.hao', rid:'10500111', rname:'龙腾九霄', ch:'飞书渠道', atime:'2026-01-22 11:05' },
+  ]
+};
+
+function renderRow(item) {
+  var statusBadge = item.status === 'activated'
+    ? '<span class="badge badge-approved"><span class="badge-dot"></span>已激活</span>'
+    : '<span class="badge badge-draft"><span class="badge-dot"></span>未激活</span>';
+  var disabledBadge = item.disabled
+    ? '<span class="badge badge-rejected" style="background:#fff1f0;color:#cf1322"><span class="badge-dot" style="background:#cf1322"></span>已禁用</span>'
+    : '<span style="font-size:12px;color:var(--text-tertiary)">未禁用</span>';
+  var empty = '<span style="color:var(--text-tertiary)">—</span>';
+  return '<tr>' +
+    '<td><code class="code-val">' + item.code + '</code></td>' +
+    '<td>' + statusBadge + '</td>' +
+    '<td>' + disabledBadge + '</td>' +
+    '<td class="td-muted">' + item.time + '</td>' +
+    '<td>' + item.gen + '</td>' +
+    '<td style="font-variant-numeric:tabular-nums">' + (item.rid || empty) + '</td>' +
+    '<td>' + (item.rname || empty) + '</td>' +
+    '<td>' + (item.ch || empty) + '</td>' +
+    '<td class="td-muted">' + (item.atime || empty) + '</td>' +
+  '</tr>';
+}
+
+function renderTableContent(tbodyId, items) {
+  var el = document.getElementById(tbodyId);
+  if (!el) return;
+  el.innerHTML = items.map(renderRow).join('');
+}
+
+function renderActivatedTable(tbodyId) {
+  renderTableContent(tbodyId, mockData.activated);
+}
+
+function switchOldTab(tab) {
+  ['all','inactive','active'].forEach(function(t) {
+    var panel = document.getElementById('old-panel-' + t);
+    var btn = document.getElementById('old-tab-' + t);
+    if (!panel || !btn) return;
+    var isActive = t === tab;
+    panel.style.display = isActive ? 'block' : 'none';
+    btn.className = 'tab-btn' + (isActive ? ' active' : '');
+  });
+}
+
+function switchNewTab(tab) {
+  ['all','inactive','active'].forEach(function(t) {
+    var panel = document.getElementById('new-panel-' + t);
+    var btn = document.getElementById('new-tab-' + t);
+    if (!panel || !btn) return;
+    var isActive = t === tab;
+    panel.style.display = isActive ? 'block' : 'none';
+    if (!btn.classList.contains('disabled')) {
+      btn.className = 'tab-btn' + (isActive ? ' active' : '');
+    }
+  });
+}
+
+function buildFilterBar(type, batchOptions) {
+  var html = '<div style="background:#fafafa;border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 12px;margin-bottom:10px">';
+  html += '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">';
+  html += '<input class="f-input" type="text" placeholder="兑换码" style="width:120px" />';
+  html += '<input class="f-input" type="text" placeholder="生成时间 起" style="width:105px" />';
+  html += '<span style="color:var(--text-tertiary);font-size:12px">–</span>';
+  html += '<input class="f-input" type="text" placeholder="生成时间 止" style="width:105px" />';
+
+  if (type === 'mine-all' || type === 'mine-inactive') {
+    html += '<select class="f-select" style="width:95px"><option value="">全部禁用状态</option><option>未禁用</option><option>已禁用</option></select>';
+  }
+
+  if (type === 'redeemed') {
+    html += '<input class="f-input" type="text" placeholder="角色ID" style="width:90px" />';
+    html += '<input class="f-input" type="text" placeholder="角色名" style="width:90px" />';
+  }
+
+  html += '<button class="btn btn-primary" style="height:28px;font-size:12px"><iconify-icon icon="mdi:magnify"></iconify-icon> 查询</button>';
+  html += '</div>';
+
+  if (batchOptions && (type === 'mine-all' || type === 'mine-inactive')) {
+    html += '<div style="display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)">';
+    html += '<label style="font-size:12px;color:var(--text-secondary);white-space:nowrap">我的批次</label>';
+    html += '<select class="f-select" style="width:280px;height:28px;font-size:12px">' + batchOptions + '</select>';
+    html += '</div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function buildTableHtml(items, showDownload, filterType, batchOptions) {
+  var html = '';
+  if (filterType) {
+    html += buildFilterBar(filterType, batchOptions);
+  }
+  html += '<div style="display:flex;justify-content:flex-end;margin-bottom:8px">';
+  if (showDownload) {
+    html += '<button class="btn btn-default" style="height:28px;font-size:12px"><iconify-icon icon="mdi:download-outline"></iconify-icon> 下载 Excel</button>';
+  }
+  html += '</div>';
+  html += '<div style="max-height:180px;overflow-y:auto"><table><thead><tr><th>兑换码</th><th>状态</th><th>禁用状态</th><th>生成时间</th><th>生成人</th><th>角色ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead><tbody>';
+  html += items.map(renderRow).join('');
+  html += '</tbody></table></div>';
+  html += '<div class="pagination"><span class="total">共 ' + items.length + ' 条（示例）</span><div class="page-btns"><button class="page-btn active">1</button><span style="font-size:12px;color:var(--text-secondary);margin-left:8px">每页 10 条</span></div></div>';
+  return html;
+}
+
+function buildBatchOverview(currentUserName) {
+  var batches = [
+    { id:'#1234', gen:'Jay.zhu', time:'2026-02-28 10:30', total:5000, redeemed:3412, unredeemed:1488, disabled:100 },
+    { id:'#0891', gen:'Gali.hao', time:'2026-01-15 09:10', total:2000, redeemed:1400, unredeemed:580, disabled:20 },
+    { id:'#0756', gen:'Tom.li', time:'2025-12-20 16:45', total:1500, redeemed:1320, unredeemed:170, disabled:10 },
+    { id:'#0623', gen:'Jay.zhu', time:'2025-11-08 11:20', total:3000, redeemed:2850, unredeemed:130, disabled:20 },
+    { id:'#0510', gen:'Lucy.wang', time:'2025-10-15 09:00', total:800, redeemed:780, unredeemed:15, disabled:5 },
+    { id:'#0402', gen:'Gali.hao', time:'2025-09-22 14:30', total:2500, redeemed:2400, unredeemed:85, disabled:15 },
+  ];
+  var totalAll = 0, redeemedAll = 0, unredeemedAll = 0, disabledAll = 0;
+  batches.forEach(function(b) { totalAll += b.total; redeemedAll += b.redeemed; unredeemedAll += b.unredeemed; disabledAll += b.disabled; });
+
+  var thStyle = 'padding:7px 10px;font-size:11.5px;position:sticky;top:0;background:#fafafa;z-index:1';
+
+  var html = '<div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">';
+  html += '<div style="background:#fafafa;padding:8px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">';
+  html += '<div style="font-size:13px;font-weight:600;color:var(--text-secondary);display:flex;align-items:center;gap:5px"><iconify-icon icon="mdi:clipboard-text-outline" style="font-size:14px"></iconify-icon> 生成记录概览 <span style="font-size:11px;font-weight:400;color:var(--text-tertiary)">（所有运营/客服可见 · 不含码值明细 · 共 ' + batches.length + ' 个批次）</span></div>';
+  html += '<button class="btn btn-default" style="height:24px;font-size:11px;padding:0 8px" id="toggle-overview-btn" onclick="toggleOverview()"><iconify-icon icon="mdi:chevron-up" id="toggle-overview-icon" style="font-size:14px"></iconify-icon></button>';
+  html += '</div>';
+  html += '<div id="overview-body">';
+  html += '<div style="max-height:130px;overflow-y:auto">';
+  html += '<table style="font-size:12.5px">';
+  html += '<thead><tr style="background:#fafafa"><th style="' + thStyle + '">批次</th><th style="' + thStyle + '">生成人</th><th style="' + thStyle + '">生成时间</th><th style="' + thStyle + ';text-align:right">生成数量</th><th style="' + thStyle + ';text-align:right">已兑换</th><th style="' + thStyle + ';text-align:right">未兑换</th><th style="' + thStyle + ';text-align:right">已禁用</th></tr></thead>';
+  html += '<tbody>';
+  batches.forEach(function(b) {
+    var isMine = b.gen === currentUserName;
+    var genLabel = isMine
+      ? b.gen + ' <span style="font-size:10px;background:#e8f3ff;color:var(--primary);padding:0 4px;border-radius:3px;margin-left:3px">我</span>'
+      : b.gen;
+    html += '<tr>';
+    html += '<td style="padding:7px 10px;font-size:12px;font-weight:500">' + b.id + '</td>';
+    html += '<td style="padding:7px 10px;font-size:12px">' + genLabel + '</td>';
+    html += '<td style="padding:7px 10px" class="td-muted">' + b.time + '</td>';
+    html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:500">' + b.total.toLocaleString() + '</td>';
+    html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#389e0d">' + b.redeemed.toLocaleString() + '</td>';
+    html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#0958d9">' + b.unredeemed.toLocaleString() + '</td>';
+    html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#cf1322">' + b.disabled.toLocaleString() + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  html += '</table>';
+  html += '</div>';
+  html += '<div style="background:#f7f8fa;border-top:1px solid var(--border);padding:0">';
+  html += '<table style="font-size:12.5px"><tbody><tr>';
+  html += '<td style="padding:7px 10px;font-size:12px;font-weight:600" colspan="3">合计（' + batches.length + ' 个批次）</td>';
+  html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700">' + totalAll.toLocaleString() + '</td>';
+  html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#389e0d">' + redeemedAll.toLocaleString() + '</td>';
+  html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#0958d9">' + unredeemedAll.toLocaleString() + '</td>';
+  html += '<td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#cf1322">' + disabledAll.toLocaleString() + '</td>';
+  html += '</tr></tbody></table>';
+  html += '</div>';
+  html += '</div></div>';
+  return html;
+}
+
+function toggleOverview() {
+  var body = document.getElementById('overview-body');
+  var icon = document.getElementById('toggle-overview-icon');
+  if (!body || !icon) return;
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    icon.setAttribute('icon', 'mdi:chevron-up');
+  } else {
+    body.style.display = 'none';
+    icon.setAttribute('icon', 'mdi:chevron-down');
+  }
+}
+
+function buildNoPermissionHtml(genPerson) {
+  return '<div class="no-permission-tip">' +
+    '<iconify-icon icon="mdi:lock-outline"></iconify-icon>' +
+    '<div class="tip-main">仅生成人本人可查看此内容</div>' +
+    '<div class="tip-sub">此活动的码值由 ' + genPerson + ' 等人生成，如需了解详情请联系对应生成人</div>' +
+  '</div>';
+}
+
+function switchUser(user) {
+  currentUser = user;
+  var btns = document.querySelectorAll('#userToggle button');
+  btns.forEach(function(b, i) {
+    b.className = (i === 0 && user === 'jay') || (i === 1 && user === 'gali') || (i === 2 && user === 'cs') ? 'active' : '';
+  });
+  renderAll();
+}
+
+function renderAll() {
+  var isJay = currentUser === 'jay';
+  var isGali = currentUser === 'gali';
+  var isCs = currentUser === 'cs';
+  var isOwner = isJay;
+
+  // ===== 原始方案 =====
+  if (isOwner) {
+    renderTableContent('old-tbody-all', mockData.jay);
+    renderTableContent('old-tbody-inactive', mockData.jay.filter(function(r) { return r.status === 'inactive'; }));
+    renderActivatedTable('old-tbody-active');
+    document.getElementById('old-page-total-all').textContent = '共 5,000 条';
+    document.getElementById('old-total').textContent = '5,000';
+  } else {
+    document.getElementById('old-tbody-all').innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-tertiary)"><iconify-icon icon="mdi:eye-off-outline" style="font-size:28px;display:block;margin:0 auto 8px;opacity:.3"></iconify-icon>此 Tab 仅对生成人可见</td></tr>';
+    document.getElementById('old-tbody-inactive').innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;color:var(--text-tertiary)"><iconify-icon icon="mdi:eye-off-outline" style="font-size:28px;display:block;margin:0 auto 8px;opacity:.3"></iconify-icon>此 Tab 仅对生成人可见</td></tr>';
+    renderActivatedTable('old-tbody-active');
+    document.getElementById('old-page-total-all').textContent = '共 0 条（无权限）';
+    document.getElementById('old-total').textContent = '7,000';
+  }
+
+  var oldAnnText = document.getElementById('old-annotation-text');
+  if (isJay) {
+    oldAnnText.innerHTML = '<strong>当前：</strong>Jay.zhu 是批次 #1234 的生成人，可见全部 Tab 和数据，体验正常。<br/><strong>潜在问题：</strong>切换到其他用户查看时，统计区仍显示 7,000 总量（含别人生成的 2,000 个），但「全部」Tab 只能看到自己的 5,000 条——数字与可见数据不一致。';
+  } else if (isGali) {
+    oldAnnText.innerHTML = '<strong>当前：</strong>Gali.hao 是批次 #0891 的生成人（2,000 个），但不是批次 #1234 的生成人。<br/><strong>问题暴露：</strong>① 统计区显示 7,000 总量，但「全部」Tab 按原始设计应只展示 Gali 自己的 2,000 条（本 Demo 简化为不可见）；② 批次下拉可选到 Jay.zhu 的批次 #1234，选中后看不到数据但统计数字不变，用户困惑。';
+  } else {
+    oldAnnText.innerHTML = '<strong>当前：</strong>客服小王没有生成过任何码值。<br/><strong>问题暴露：</strong>① 统计区显示 7,000 / 3,412，但「全部」「未兑换」Tab 完全为空；② 用户会认为系统出 bug；③ 批次下拉能看到所有批次但选哪个都看不到数据。';
+  }
+
+  // ===== 优化方案 =====
+  var statMine = document.getElementById('new-stat-mine');
+  var statMineLabel = document.getElementById('new-stat-mine-label');
+  var statMineValue = document.getElementById('new-stat-mine-value');
+  var statMineSub = document.getElementById('new-stat-mine-sub');
+  var tabsContainer = document.getElementById('new-tabs');
+  var batchOverview = document.getElementById('new-batch-overview');
+
+  var jayBatchOpts = '<option selected>我的全部批次</option><option>批次 #1234【2026-02-28 10:30】5,000 个</option>';
+  var galiBatchOpts = '<option selected>我的全部批次</option><option>批次 #0891【2026-01-15 09:10】2,000 个</option>';
+
+  var userNames = { jay: 'Jay.zhu', gali: 'Gali.hao', cs: '' };
+  batchOverview.innerHTML = buildBatchOverview(userNames[currentUser] || '');
+
+  if (isJay) {
+    statMineLabel.textContent = '我的生成量';
+    statMineValue.textContent = '5,000';
+    statMineSub.textContent = '与「我的全部」「我的未兑换」Tab 数据一致';
+    statMine.style.background = '#f0f5ff';
+    statMine.style.borderColor = '#adc6ff';
+
+    tabsContainer.innerHTML =
+      '<button class="tab-btn active" id="new-tab-all" onclick="switchNewTab(\'all\')">我的全部 <span class="tab-badge-perm perm-owner">仅生成人</span></button>' +
+      '<button class="tab-btn" id="new-tab-inactive" onclick="switchNewTab(\'inactive\')">我的未兑换 <span class="tab-badge-perm perm-owner">仅生成人</span></button>' +
+      '<button class="tab-btn" id="new-tab-active" onclick="switchNewTab(\'active\')">全部已兑换 <span class="tab-badge-perm perm-all">所有运营</span></button>';
+
+    document.getElementById('new-panel-all').innerHTML = buildTableHtml(mockData.jay, true, 'mine-all', jayBatchOpts);
+    document.getElementById('new-panel-inactive').innerHTML = buildTableHtml(mockData.jay.filter(function(r){ return r.status === 'inactive'; }), true, 'mine-inactive', jayBatchOpts);
+    document.getElementById('new-panel-active').innerHTML = buildTableHtml(mockData.activated, true, 'redeemed');
+    document.getElementById('new-panel-all').style.display = 'block';
+    document.getElementById('new-panel-inactive').style.display = 'none';
+    document.getElementById('new-panel-active').style.display = 'none';
+
+  } else if (isGali) {
+    statMineLabel.textContent = '我的生成量';
+    statMineValue.textContent = '2,000';
+    statMineSub.textContent = '与「我的全部」「我的未兑换」Tab 数据一致';
+    statMine.style.background = '#f0f5ff';
+    statMine.style.borderColor = '#adc6ff';
+
+    var galiData = [
+      { code:'XFJM8HYZ', status:'activated', disabled:false, time:'2026-01-15 09:10:01', gen:'Gali.hao', rid:'10455678', rname:'月影幻光', ch:'官方渠道', atime:'2026-01-20 18:30' },
+      { code:'XFJM3WRK', status:'activated', disabled:false, time:'2026-01-15 09:10:01', gen:'Gali.hao', rid:'10500111', rname:'龙腾九霄', ch:'飞书渠道', atime:'2026-01-22 11:05' },
+      { code:'XFJM7PLQ', status:'inactive',  disabled:false, time:'2026-01-15 09:10:02', gen:'Gali.hao', rid:'', rname:'', ch:'', atime:'' },
+    ];
+
+    tabsContainer.innerHTML =
+      '<button class="tab-btn active" id="new-tab-all" onclick="switchNewTab(\'all\')">我的全部 <span class="tab-badge-perm perm-owner">仅生成人</span></button>' +
+      '<button class="tab-btn" id="new-tab-inactive" onclick="switchNewTab(\'inactive\')">我的未兑换 <span class="tab-badge-perm perm-owner">仅生成人</span></button>' +
+      '<button class="tab-btn" id="new-tab-active" onclick="switchNewTab(\'active\')">全部已兑换 <span class="tab-badge-perm perm-all">所有运营</span></button>';
+
+    document.getElementById('new-panel-all').innerHTML = buildTableHtml(galiData, true, 'mine-all', galiBatchOpts);
+    document.getElementById('new-panel-inactive').innerHTML = buildTableHtml(galiData.filter(function(r){ return r.status === 'inactive'; }), true, 'mine-inactive', galiBatchOpts);
+    document.getElementById('new-panel-active').innerHTML = buildTableHtml(mockData.activated, true, 'redeemed');
+    document.getElementById('new-panel-all').style.display = 'block';
+    document.getElementById('new-panel-inactive').style.display = 'none';
+    document.getElementById('new-panel-active').style.display = 'none';
+
+  } else {
+    statMineLabel.textContent = '您未生成过码值';
+    statMineValue.textContent = '—';
+    statMineSub.textContent = '您没有本活动的生成记录';
+    statMine.style.background = '#f7f8fa';
+    statMine.style.borderColor = '#e5e6eb';
+
+    tabsContainer.innerHTML =
+      '<button class="tab-btn disabled" id="new-tab-all" onclick="return false" title="仅对生成人本人可见">' +
+        '<iconify-icon icon="mdi:lock-outline" style="font-size:13px;margin-right:2px;vertical-align:-1px"></iconify-icon> 我的全部 <span class="tab-badge-perm perm-locked">无权限</span>' +
+      '</button>' +
+      '<button class="tab-btn disabled" id="new-tab-inactive" onclick="return false" title="仅对生成人本人可见">' +
+        '<iconify-icon icon="mdi:lock-outline" style="font-size:13px;margin-right:2px;vertical-align:-1px"></iconify-icon> 我的未兑换 <span class="tab-badge-perm perm-locked">无权限</span>' +
+      '</button>' +
+      '<button class="tab-btn active" id="new-tab-active" onclick="switchNewTab(\'active\')">全部已兑换 <span class="tab-badge-perm perm-all">所有运营</span></button>';
+
+    document.getElementById('new-panel-all').innerHTML = buildNoPermissionHtml('Jay.zhu、Gali.hao');
+    document.getElementById('new-panel-all').style.display = 'none';
+    document.getElementById('new-panel-inactive').innerHTML = buildNoPermissionHtml('Jay.zhu、Gali.hao');
+    document.getElementById('new-panel-inactive').style.display = 'none';
+    document.getElementById('new-panel-active').innerHTML = buildTableHtml(mockData.activated, true, 'redeemed');
+    document.getElementById('new-panel-active').style.display = 'block';
+  }
+
+  var newAnnText = document.getElementById('new-annotation-text');
+  if (isJay) {
+    newAnnText.innerHTML = '<strong>优化效果（Jay.zhu 生成人视角）：</strong><br/>' +
+      '① <strong>生成记录概览</strong>：不仅能看自己的批次 #1234，还能看到 Gali 的批次 #0891 的聚合数据（已兑换/未兑换/已禁用），掌握活动全貌<br/>' +
+      '② 自己的批次标记「我」标签，操作列为「—」；他人批次显示「联系」按钮（跳转飞书）<br/>' +
+      '③ 概览表格支持折叠，不影响下方 Tab 的使用空间';
+  } else if (isGali) {
+    newAnnText.innerHTML = '<strong>优化效果（Gali.hao 非主要生成人视角）：</strong><br/>' +
+      '① <strong>关键场景覆盖</strong>：Gali 不是 #1234 的生成人，但通过概览表格可以看到该批次的未兑换 1,488 条、已禁用 100 条等聚合数据，无需联系 Jay<br/>' +
+      '② 如需进一步了解 #1234 的具体码值，可通过「联系」按钮找 Jay.zhu 协助<br/>' +
+      '③ Gali 自己的批次 #0891 可正常在「我的全部」Tab 查看/下载码值明细';
+  } else {
+    newAnnText.innerHTML = '<strong>优化效果（客服小王视角）：</strong><br/>' +
+      '① <strong>生成记录概览</strong>：客服虽无生成权限，但可看到各批次的兑换进度（已兑换/未兑换/已禁用），快速判断活动整体情况<br/>' +
+      '② 如需排查具体码值问题，可在「全部已兑换」Tab 按角色ID搜索，或使用单码查询页逐条查<br/>' +
+      '③ 需要协助时，概览表格的「联系」按钮可直达对应生成人的飞书';
+  }
+}
+
+renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+
+rectangle "新增复用码"
+rectangle "填写活动配置含口令"
+rectangle "提交"
+rectangle "立即触发 BPM 飞书审批"
+rectangle "审批通过"
+rectangle "口令生效"
+rectangle "可查看日志与兑换情况"
+rectangle "审批拒绝"
+rectangle "口令不生效"
+
+"新增复用码" -down-> "填写活动配置含口令"
+"填写活动配置含口令" -down-> "提交"
+"提交" -down-> "立即触发 BPM 飞书审批"
+"立即触发 BPM 飞书审批" -down-> "审批通过"
+"立即触发 BPM 飞书审批" -down-> "审批拒绝"
+"审批通过" -down-> "口令生效"
+"口令生效" -down-> "可查看日志与兑换情况"
+"审批拒绝" -down-> "口令不生效"
+
+@enduml

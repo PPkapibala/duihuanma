@@ -2017,43 +2017,56 @@
 
 <!-- ===== MODAL: 查看码值 ===== -->
 <div class="modal-overlay" id="modal-codes-view">
-  <div class="modal" style="width:820px;max-height:88vh">
+  <div class="modal" style="width:860px;max-height:90vh">
     <div class="modal-header">
       <div class="modal-title"><iconify-icon icon="mdi:ticket-outline" style="font-size:15px"></iconify-icon> 兑换码 · 3月登录礼包</div>
       <button class="modal-close" onclick="closeModal('modal-codes-view')" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
     </div>
     <div class="modal-body" style="padding-bottom:0">
-      <!-- 筛选区 -->
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
-        <input class="f-input" type="text" placeholder="兑换码" style="width:160px" />
-        <input class="f-input" type="text" placeholder="生成时间 起" style="width:130px" />
-        <span style="color:var(--text-tertiary);font-size:13px">–</span>
-        <input class="f-input" type="text" placeholder="生成时间 止" style="width:130px" />
-        <select class="f-select" style="width:110px">
-          <option value="">全部禁用状态</option>
-          <option>未禁用</option>
-          <option>已禁用</option>
-        </select>
-        <button class="btn btn-primary" onclick="toast('查询完成','info')"><iconify-icon icon="mdi:magnify"></iconify-icon> 查询</button>
-      </div>
-      <div style="margin-bottom:14px">
-        <label style="font-size:13px;color:var(--text-secondary);margin-right:6px">生成批次</label>
-        <select class="f-select" id="cv-batch-select" style="width:320px">
-          <option value="" selected>全部</option>
-          <option value="1234">批次 #1234【2026年2月28日 10:30 · Jay.zhu 生成】5,000 个</option>
-          <option value="0891">批次 #0891【2026年1月15日 09:10 · Jay.zhu 生成】2,000 个</option>
-        </select>
-        <span style="font-size:12px;color:var(--text-tertiary);margin-left:8px">兑换列表不受批次筛选影响，始终展示本活动全部已兑换记录</span>
-      </div>
-      <!-- 统计卡片 -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+      <!-- 三列统计卡片 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
         <div style="background:#f0f9ff;border:1px solid #bae0ff;border-radius:var(--radius);padding:12px 16px">
-          <div style="font-size:12px;color:#0958d9;margin-bottom:4px">兑换码总数量</div>
-          <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#003eb3">5,000</div>
+          <div style="font-size:12px;color:#0958d9;margin-bottom:4px;display:flex;align-items:center;gap:4px"><iconify-icon icon="mdi:sigma" style="font-size:13px"></iconify-icon> 活动总码量</div>
+          <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#003eb3">7,000</div>
+          <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px">所有批次汇总</div>
+        </div>
+        <div style="background:#f0f5ff;border:1px solid #adc6ff;border-radius:var(--radius);padding:12px 16px">
+          <div style="font-size:12px;color:#1d39c4;margin-bottom:4px;display:flex;align-items:center;gap:4px"><iconify-icon icon="mdi:account-outline" style="font-size:13px"></iconify-icon> 我的生成量</div>
+          <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#10239e">5,000</div>
+          <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px">与「我的全部」「我的未兑换」Tab 数据一致</div>
         </div>
         <div style="background:#f6ffed;border:1px solid #b7eb8f;border-radius:var(--radius);padding:12px 16px">
-          <div style="font-size:12px;color:#389e0d;margin-bottom:4px">已兑换数量</div>
-          <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#237804">3,412</div>
+          <div style="font-size:12px;color:#389e0d;margin-bottom:4px;display:flex;align-items:center;gap:4px"><iconify-icon icon="mdi:check-circle-outline" style="font-size:13px"></iconify-icon> 已兑换数量</div>
+          <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:#237804">4,812</div>
+          <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px">活动全部已兑换</div>
+        </div>
+      </div>
+      <!-- 生成记录概览（所有运营/客服可见，不含码值明细） -->
+      <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px">
+        <div style="background:#fafafa;padding:8px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+          <div style="font-size:13px;font-weight:600;color:var(--text-secondary);display:flex;align-items:center;gap:5px"><iconify-icon icon="mdi:clipboard-text-outline" style="font-size:14px"></iconify-icon> 生成记录概览 <span style="font-size:11px;font-weight:400;color:var(--text-tertiary)">（所有运营/客服可见 · 不含码值明细 · 共 3 个批次）</span></div>
+          <button class="btn btn-default" style="height:24px;font-size:11px;padding:0 8px" onclick="var b=document.getElementById('cv-overview-body'),i=document.getElementById('cv-overview-icon');if(b.style.display==='none'){b.style.display='block';i.setAttribute('icon','mdi:chevron-up')}else{b.style.display='none';i.setAttribute('icon','mdi:chevron-down')}"><iconify-icon icon="mdi:chevron-up" id="cv-overview-icon" style="font-size:14px"></iconify-icon></button>
+        </div>
+        <div id="cv-overview-body">
+          <div style="max-height:120px;overflow-y:auto">
+            <table style="font-size:12.5px">
+              <thead><tr style="background:#fafafa"><th style="padding:7px 10px;font-size:11.5px;position:sticky;top:0;background:#fafafa;z-index:1">批次</th><th style="padding:7px 10px;font-size:11.5px;position:sticky;top:0;background:#fafafa;z-index:1">生成人</th><th style="padding:7px 10px;font-size:11.5px;position:sticky;top:0;background:#fafafa;z-index:1">生成时间</th><th style="padding:7px 10px;font-size:11.5px;text-align:right;position:sticky;top:0;background:#fafafa;z-index:1">生成数量</th><th style="padding:7px 10px;font-size:11.5px;text-align:right;position:sticky;top:0;background:#fafafa;z-index:1">已兑换</th><th style="padding:7px 10px;font-size:11.5px;text-align:right;position:sticky;top:0;background:#fafafa;z-index:1">未兑换</th><th style="padding:7px 10px;font-size:11.5px;text-align:right;position:sticky;top:0;background:#fafafa;z-index:1">已禁用</th></tr></thead>
+              <tbody>
+                <tr><td style="padding:7px 10px;font-size:12px;font-weight:500">#1234</td><td style="padding:7px 10px;font-size:12px">Jay.zhu <span style="font-size:10px;background:#e8f3ff;color:var(--primary);padding:0 4px;border-radius:3px;margin-left:3px">我</span></td><td style="padding:7px 10px" class="td-muted">2026-02-28 10:30</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:500">5,000</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#389e0d">3,412</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#0958d9">1,488</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#cf1322">100</td></tr>
+                <tr><td style="padding:7px 10px;font-size:12px;font-weight:500">#0891</td><td style="padding:7px 10px;font-size:12px">Gali.hao</td><td style="padding:7px 10px" class="td-muted">2026-01-15 09:10</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:500">1,500</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#389e0d">1,200</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#0958d9">285</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#cf1322">15</td></tr>
+                <tr><td style="padding:7px 10px;font-size:12px;font-weight:500">#0623</td><td style="padding:7px 10px;font-size:12px">Tom.li</td><td style="padding:7px 10px" class="td-muted">2025-12-20 16:45</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:500">500</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#389e0d">200</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#0958d9">295</td><td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;color:#cf1322">5</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="background:#f7f8fa;border-top:1px solid var(--border);padding:0">
+            <table style="font-size:12.5px"><tbody><tr>
+              <td style="padding:7px 10px;font-size:12px;font-weight:600" colspan="3">合计（3 个批次）</td>
+              <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700">7,000</td>
+              <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#389e0d">4,812</td>
+              <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#0958d9">2,068</td>
+              <td style="padding:7px 10px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:#cf1322">120</td>
+            </tr></tbody></table>
+          </div>
         </div>
       </div>
       <!-- 下载日志（所有人可见） -->
@@ -2072,43 +2085,59 @@
         <div style="display:flex;gap:0">
           <button id="cv-tab-all" onclick="switchCodesTab('all')"
             style="padding:8px 18px;border:none;background:none;cursor:pointer;font-size:13.5px;font-weight:600;color:var(--primary);border-bottom:2px solid var(--primary);font-family:inherit">
-            全部
-            <span style="font-size:11px;background:#fff2e8;color:#d46b08;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500">仅生成人可见</span>
+            我的全部
+            <span style="font-size:11px;background:#fff2e8;color:#d46b08;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500">仅生成人</span>
           </button>
           <button id="cv-tab-inactive" onclick="switchCodesTab('inactive')"
             style="padding:8px 18px;border:none;background:none;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--text-secondary);border-bottom:2px solid transparent;font-family:inherit">
-            未兑换列表
-            <span style="font-size:11px;background:#fff2e8;color:#d46b08;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500">仅生成人可见</span>
+            我的未兑换
+            <span style="font-size:11px;background:#fff2e8;color:#d46b08;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500">仅生成人</span>
           </button>
           <button id="cv-tab-active" onclick="switchCodesTab('active')"
             style="padding:8px 18px;border:none;background:none;cursor:pointer;font-size:13.5px;font-weight:500;color:var(--text-secondary);border-bottom:2px solid transparent;font-family:inherit">
-            兑换列表
+            全部已兑换
             <span style="font-size:11px;background:#f0f9ff;color:#0958d9;padding:1px 6px;border-radius:8px;margin-left:4px;font-weight:500">所有运营</span>
           </button>
         </div>
       </div>
-      <!-- 全部 Tab -->
+      <!-- 我的全部 Tab -->
       <div id="cv-panel-all" style="padding-top:12px">
+        <div style="background:#fafafa;border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 12px;margin-bottom:10px">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input class="f-input" type="text" placeholder="兑换码" style="width:130px" />
+            <input class="f-input" type="text" placeholder="生成时间 起" style="width:115px" />
+            <span style="color:var(--text-tertiary);font-size:12px">–</span>
+            <input class="f-input" type="text" placeholder="生成时间 止" style="width:115px" />
+            <select class="f-select" style="width:100px"><option value="">全部禁用状态</option><option>未禁用</option><option>已禁用</option></select>
+            <button class="btn btn-primary" onclick="toast('查询完成','info')"><iconify-icon icon="mdi:magnify"></iconify-icon> 查询</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)">
+            <label style="font-size:12px;color:var(--text-secondary);white-space:nowrap">我的批次</label>
+            <select class="f-select" style="width:300px;height:28px;font-size:12px">
+              <option selected>我的全部批次</option>
+              <option>批次 #1234【2026-02-28 10:30】5,000 个</option>
+            </select>
+          </div>
+        </div>
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
           <button class="btn btn-default" onclick="toast('已导出全部码值 Excel','success')">
             <iconify-icon icon="mdi:download-outline"></iconify-icon> 下载 Excel
           </button>
         </div>
-        <div class="table-wrap" style="max-height:220px;overflow-y:auto">
+        <div class="table-wrap" style="max-height:200px;overflow-y:auto">
           <table>
             <thead><tr><th>兑换码</th><th>状态</th><th>禁用状态</th><th>生成时间</th><th>生成人</th><th>激活角色 ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
             <tbody>
               <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM2A8K</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td class="td-mono">10234567</td><td>剑客无情</td><td>官方渠道</td><td class="td-muted">2026-02-15 14:23</td></tr>
               <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMT5NE</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td class="td-mono">10298834</td><td>星辰若梦</td><td>飞书渠道</td><td class="td-muted">2026-02-16 09:41</td></tr>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM9P3L</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM4K7Q</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span class="badge badge-rejected" style="background:#fff1f0;color:#cf1322"><span class="badge-dot" style="background:#cf1322"></span>已禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM9P3L</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM4K7Q</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span class="badge badge-rejected" style="background:#fff1f0;color:#cf1322"><span class="badge-dot" style="background:#cf1322"></span>已禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
               <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMV8CX</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td class="td-mono">10301122</td><td>烈火骑士</td><td>官方渠道</td><td class="td-muted">2026-02-17 20:08</td></tr>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMR2HW</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM6DBA</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMR2HW</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM6DBA</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
             </tbody>
           </table>
         </div>
-        <!-- 分页 -->
         <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light)">
           <span style="font-size:12px;color:var(--text-tertiary)">共 5,000 条</span>
           <div style="display:flex;align-items:center;gap:4px">
@@ -2125,25 +2154,41 @@
           </div>
         </div>
       </div>
-      <!-- 未兑换 Tab -->
+      <!-- 我的未兑换 Tab -->
       <div id="cv-panel-inactive" style="display:none;padding-top:12px">
+        <div style="background:#fafafa;border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 12px;margin-bottom:10px">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input class="f-input" type="text" placeholder="兑换码" style="width:130px" />
+            <input class="f-input" type="text" placeholder="生成时间 起" style="width:115px" />
+            <span style="color:var(--text-tertiary);font-size:12px">–</span>
+            <input class="f-input" type="text" placeholder="生成时间 止" style="width:115px" />
+            <select class="f-select" style="width:100px"><option value="">全部禁用状态</option><option>未禁用</option><option>已禁用</option></select>
+            <button class="btn btn-primary" onclick="toast('查询完成','info')"><iconify-icon icon="mdi:magnify"></iconify-icon> 查询</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)">
+            <label style="font-size:12px;color:var(--text-secondary);white-space:nowrap">我的批次</label>
+            <select class="f-select" style="width:300px;height:28px;font-size:12px">
+              <option selected>我的全部批次</option>
+              <option>批次 #1234【2026-02-28 10:30】5,000 个</option>
+            </select>
+          </div>
+        </div>
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
           <button class="btn btn-default" onclick="toast('已导出未兑换码值 Excel','success')">
             <iconify-icon icon="mdi:download-outline"></iconify-icon> 下载 Excel
           </button>
         </div>
-        <div class="table-wrap" style="max-height:220px;overflow-y:auto">
+        <div class="table-wrap" style="max-height:200px;overflow-y:auto">
           <table>
             <thead><tr><th>兑换码</th><th>状态</th><th>禁用状态</th><th>生成时间</th><th>生成人</th><th>激活角色 ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
             <tbody>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM9P3L</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM4K7Q</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span class="badge badge-rejected" style="background:#fff1f0;color:#cf1322"><span class="badge-dot" style="background:#cf1322"></span>已禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMR2HW</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
-              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM6DBA</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM9P3L</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM4K7Q</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span class="badge badge-rejected" style="background:#fff1f0;color:#cf1322"><span class="badge-dot" style="background:#cf1322"></span>已禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMR2HW</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM6DBA</code></td><td><span class="badge badge-draft"><span class="badge-dot"></span>未激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td><td style="color:var(--text-tertiary)">—</td></tr>
             </tbody>
           </table>
         </div>
-        <!-- 分页 -->
         <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light)">
           <span style="font-size:12px;color:var(--text-tertiary)">共 1,588 条</span>
           <div style="display:flex;align-items:center;gap:4px">
@@ -2160,44 +2205,38 @@
           </div>
         </div>
       </div>
-      <!-- 兑换列表 Tab -->
+      <!-- 全部已兑换 Tab -->
       <div id="cv-panel-active" style="display:none;padding-top:12px">
+        <div style="background:#fafafa;border:1px solid var(--border-light);border-radius:var(--radius);padding:10px 12px;margin-bottom:10px">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input class="f-input" type="text" placeholder="兑换码" style="width:130px" />
+            <input class="f-input" type="text" placeholder="生成时间 起" style="width:115px" />
+            <span style="color:var(--text-tertiary);font-size:12px">–</span>
+            <input class="f-input" type="text" placeholder="生成时间 止" style="width:115px" />
+            <input class="f-input" type="text" placeholder="角色 ID" style="width:100px" />
+            <input class="f-input" type="text" placeholder="角色名" style="width:100px" />
+            <button class="btn btn-primary" onclick="toast('查询完成','info')"><iconify-icon icon="mdi:magnify"></iconify-icon> 查询</button>
+          </div>
+        </div>
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
           <button class="btn btn-default" onclick="toast('已导出兑换记录 Excel','success')">
             <iconify-icon icon="mdi:download-outline"></iconify-icon> 下载 Excel
           </button>
         </div>
-        <div class="table-wrap" style="max-height:220px;overflow-y:auto">
+        <div class="table-wrap" style="max-height:200px;overflow-y:auto">
           <table>
             <thead><tr><th>兑换码</th><th>状态</th><th>禁用状态</th><th>生成时间</th><th>生成人</th><th>激活角色 ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
             <tbody>
-              <tr>
-                <td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM2A8K</code></td>
-                <td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td>
-                <td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td>
-                <td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td class="td-mono">10234567</td><td>剑客无情</td><td>官方渠道</td>
-                <td class="td-muted">2026-02-15 14:23:06</td>
-              </tr>
-              <tr>
-                <td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMT5NE</code></td>
-                <td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td>
-                <td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td>
-                <td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td class="td-mono">10298834</td><td>星辰若梦</td><td>飞书渠道</td>
-                <td class="td-muted">2026-02-16 09:41:22</td>
-              </tr>
-              <tr>
-                <td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMV8CX</code></td>
-                <td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td>
-                <td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td>
-                <td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td class="td-mono">10301122</td><td>烈火骑士</td><td>官方渠道</td>
-                <td class="td-muted">2026-02-17 20:08:54</td>
-              </tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM2A8K</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td class="td-mono">10234567</td><td>剑客无情</td><td>官方渠道</td><td class="td-muted">2026-02-15 14:23:06</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMT5NE</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:01</td><td>Jay.zhu</td><td class="td-mono">10298834</td><td>星辰若梦</td><td>飞书渠道</td><td class="td-muted">2026-02-16 09:41:22</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJMV8CX</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-02-28 10:30:02</td><td>Jay.zhu</td><td class="td-mono">10301122</td><td>烈火骑士</td><td>官方渠道</td><td class="td-muted">2026-02-17 20:08:54</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM8HYZ</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-01-15 09:10:01</td><td>Gali.hao</td><td class="td-mono">10455678</td><td>月影幻光</td><td>官方渠道</td><td class="td-muted">2026-01-20 18:30:15</td></tr>
+              <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">XFJM3WRK</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td><span style="font-size:12px;color:var(--text-tertiary)">未禁用</span></td><td class="td-muted">2026-01-15 09:10:01</td><td>Gali.hao</td><td class="td-mono">10500111</td><td>龙腾九霄</td><td>飞书渠道</td><td class="td-muted">2026-01-22 11:05:33</td></tr>
             </tbody>
           </table>
         </div>
-        <!-- 分页 -->
         <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light)">
-          <span style="font-size:12px;color:var(--text-tertiary)">共 3,412 条</span>
+          <span style="font-size:12px;color:var(--text-tertiary)">共 4,812 条</span>
           <div style="display:flex;align-items:center;gap:4px">
             <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" disabled>«</button>
             <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" disabled>‹</button>
@@ -2205,7 +2244,7 @@
             <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('跳转到第 2 页','info')">2</button>
             <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('跳转到第 3 页','info')">3</button>
             <span style="font-size:12px;color:var(--text-tertiary)">…</span>
-            <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('跳转到第 342 页','info')">342</button>
+            <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('跳转到第 482 页','info')">482</button>
             <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" onclick="toast('跳转到下一页','info')">›</button>
             <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" onclick="toast('跳转到最后一页','info')">»</button>
             <span style="font-size:12px;color:var(--text-secondary);margin-left:8px">每页 10 条</span>
@@ -3265,7 +3304,7 @@
             <tr style="background:#fafafa;font-weight:600"><td colspan="3" style="text-align:right;color:var(--text-secondary)">合计单码价值</td><td style="color:var(--error)">¥20.00</td></tr>
           </tbody>
         </table>
-        <div class="drawer-section" style="margin-top:20px">生成记录</div>
+        <div class="drawer-section" style="margin-top:20px">审批记录</div>
         <table class="gift-table">
           <thead><tr><th>生成人</th><th>数量</th><th>价值</th><th>状态</th><th>审批链接</th></tr></thead>
             <tbody>

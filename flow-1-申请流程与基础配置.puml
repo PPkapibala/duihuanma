@@ -1,0 +1,25 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+
+rectangle "BPM 搜索运营平台"
+rectangle "选择运营或客服角色"
+rectangle "提交审批"
+rectangle "审批通过"
+rectangle "飞书一键登录"
+rectangle "道具管理 批量下载"
+rectangle "本地填写道具价格"
+rectangle "批量上传道具"
+rectangle "审批人配置"
+rectangle "报表通知配置"
+
+"BPM 搜索运营平台" -down-> "选择运营或客服角色"
+"选择运营或客服角色" -down-> "提交审批"
+"提交审批" -down-> "审批通过"
+"审批通过" -down-> "飞书一键登录"
+"飞书一键登录" -down-> "道具管理 批量下载"
+"道具管理 批量下载" -down-> "本地填写道具价格"
+"本地填写道具价格" -down-> "批量上传道具"
+"批量上传道具" -down-> "审批人配置"
+"审批人配置" -down-> "报表通知配置"
+
+@enduml

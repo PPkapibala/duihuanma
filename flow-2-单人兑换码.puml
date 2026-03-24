@@ -1,0 +1,29 @@
+@startuml
+skinparam defaultFontName "Microsoft YaHei"
+
+rectangle "新增活动并保存"
+rectangle "活动处于待生成"
+rectangle "点击「生成」或「批量生成审批」"
+rectangle "填写本次生成数量并提交"
+rectangle "BPM 飞书审批"
+rectangle "审批通过"
+rectangle "系统生成码值"
+rectangle "飞书通知申请人"
+rectangle "可查看/下载码值"
+rectangle "审批拒绝"
+rectangle "本次不生成"
+rectangle "口令不生效"
+
+"新增活动并保存" -down-> "活动处于待生成"
+"活动处于待生成" -down-> "点击「生成」或「批量生成审批」"
+"点击「生成」或「批量生成审批」" -down-> "填写本次生成数量并提交"
+"填写本次生成数量并提交" -down-> "BPM 飞书审批"
+"BPM 飞书审批" -down-> "审批通过"
+"BPM 飞书审批" -down-> "审批拒绝"
+"审批通过" -down-> "系统生成码值"
+"系统生成码值" -down-> "飞书通知申请人"
+"飞书通知申请人" -down-> "可查看/下载码值"
+"审批拒绝" -down-> "本次不生成"
+"本次不生成" -down-> "口令不生效"
+
+@enduml
