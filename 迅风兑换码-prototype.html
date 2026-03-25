@@ -752,67 +752,42 @@
                 <label class="form-label">兑换码口令 <span class="req">*</span></label>
                 <input class="form-control" type="text" placeholder="请输入兑换码口令，精确匹配…" />
               </div>
-              <button class="btn btn-primary" onclick="toast('查询完成，找到匹配活动','success')">
+              <button class="btn btn-primary" onclick="document.getElementById('cs-reusable-result').style.display='block';toast('查询完成，找到 2 条匹配活动','success')">
                 <iconify-icon icon="mdi:magnify"></iconify-icon> 查询
               </button>
             </div>
           </div>
+        </div>
 
-          <div class="section-divider">活动信息</div>
-          <div class="card-body" style="padding-bottom:8px">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:13.5px">
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">活动标题：</span><strong>春节直播专属</strong></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">兑换码口令：</span><code style="background:#f0f2f5;padding:1px 6px;border-radius:3px">SPRING2026</code></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">渠道：</span>官方渠道</div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">版本：</span>2.5.0</div>
-              <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">开始时间：</span><span style="font-variant-numeric:tabular-nums">2026-02-01 00:00</span></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">结束时间：</span><span style="font-variant-numeric:tabular-nums">2026-02-28 23:59</span></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">可兑换次数上限：</span><strong>10,000</strong></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">预计生成价值：</span><strong>约 ¥500,000 元</strong></div>
-              <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"></div>
-              <div style="padding:9px 12px;grid-column:1/-1;border-bottom:1px solid var(--border-light)">
-                <div style="color:var(--text-tertiary);font-size:12px;margin-bottom:6px">礼包配置：</div>
-                <table class="gift-table">
-                  <thead><tr><th>道具名称</th><th>数量</th><th>单价</th><th>小计</th></tr></thead>
-                  <tbody>
-                    <tr><td>金币</td><td>5,000</td><td>¥0.008</td><td>¥40.00</td></tr>
-                    <tr><td>经验药水·大</td><td>10</td><td>¥1.00</td><td>¥10.00</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">单码价值：</span><span style="color:var(--error);font-weight:700">约 ¥50.00 元</span></div>
-              <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">用途：</span>免费活动 · 营销活动</div>
-              <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">备注：</span>用于直播引流</div>
-              <div style="padding:9px 12px;grid-column:1/-1;background:var(--bg-secondary);border-bottom:1px solid var(--border-light);font-size:12px;color:var(--text-tertiary)">统计（仅查看）</div>
-              <div style="padding:9px 12px;grid-column:1/-1"><span style="color:var(--text-tertiary)">已兑换次数：</span><span style="color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums">6,823</span></div>
+        <!-- 查询结果：匹配活动列表 -->
+        <div id="cs-reusable-result" style="display:block;margin-top:16px">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title"><iconify-icon icon="mdi:format-list-bulleted"></iconify-icon> 匹配活动列表</div>
+              <span style="font-size:12px;color:var(--text-tertiary)">共匹配 2 条活动（同一口令可能关联多个不同周期的活动）</span>
             </div>
-          </div>
-
-          <div class="section-divider">兑换日志（支持按角色 ID 筛选）</div>
-          <div class="card-body">
-            <div style="display:flex;gap:8px;margin-bottom:12px">
-              <input class="f-input" type="text" placeholder="输入角色 ID 筛选…" style="width:200px" />
-              <button class="btn btn-default" style="height:30px" onclick="toast('已筛选该角色兑换记录','info')">查询</button>
-            </div>
-            <table>
-              <thead><tr><th>兑换码</th><th>状态</th><th>生成时间</th><th>生成人</th><th>激活角色 ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
-              <tbody>
-                <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2026-01-28 11:10:01</td><td>Jay.zhu</td><td class="td-mono">10234567</td><td>剑客无情</td><td>官方渠道</td><td class="td-muted">2026-02-10 09:15</td></tr>
-                <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2026-01-28 11:10:01</td><td>Jay.zhu</td><td class="td-mono">10298834</td><td>星辰若梦</td><td>飞书渠道</td><td class="td-muted">2026-02-12 16:42</td></tr>
-                <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2026-01-28 11:10:01</td><td>Jay.zhu</td><td class="td-mono">10301122</td><td>烈火骑士</td><td>官方渠道</td><td class="td-muted">2026-02-14 20:08</td></tr>
-              </tbody>
-            </table>
-            <div class="table-footer" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light)">
-              <div class="page-info">共 6,823 条，每页 10 条</div>
-              <div class="page-btns">
-                <button class="page-btn" onclick="toast('上一页','info')"><iconify-icon icon="mdi:chevron-left"></iconify-icon></button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn" onclick="toast('第 2 页','info')">2</button>
-                <button class="page-btn" onclick="toast('第 3 页','info')">3</button>
-                <span style="font-size:13px;color:var(--text-tertiary);padding:0 6px">…</span>
-                <button class="page-btn" onclick="toast('第 683 页','info')">683</button>
-                <button class="page-btn" onclick="toast('下一页','info')"><iconify-icon icon="mdi:chevron-right"></iconify-icon></button>
-              </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>活动标题</th><th>口令</th><th>有效期</th><th>状态</th><th>已兑换</th><th>操作</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><strong>春节直播专属</strong></td>
+                    <td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td>
+                    <td class="td-muted" style="font-variant-numeric:tabular-nums">2026-02-01 ~ 2026-02-28</td>
+                    <td><span class="badge badge-approved"><span class="badge-dot"></span>进行中</span></td>
+                    <td style="font-variant-numeric:tabular-nums;font-weight:600">6,823</td>
+                    <td><button class="btn-text" onclick="openModal('modal-reusable-detail-1')"><iconify-icon icon="mdi:eye-outline" style="font-size:13px"></iconify-icon> 查看详情</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>去年春节活动</strong></td>
+                    <td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td>
+                    <td class="td-muted" style="font-variant-numeric:tabular-nums">2025-01-20 ~ 2025-02-20</td>
+                    <td><span class="badge badge-draft"><span class="badge-dot"></span>已结束</span></td>
+                    <td style="font-variant-numeric:tabular-nums;font-weight:600">12,450</td>
+                    <td><button class="btn-text" onclick="openModal('modal-reusable-detail-2')"><iconify-icon icon="mdi:eye-outline" style="font-size:13px"></iconify-icon> 查看详情</button></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -2011,6 +1986,131 @@
           <iconify-icon icon="mdi:download-outline"></iconify-icon> 导出结果
         </button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: 复用兑换码查询 · 活动详情1 ===== -->
+<div class="modal-overlay" id="modal-reusable-detail-1">
+  <div class="modal" style="width:840px;max-height:90vh">
+    <div class="modal-header">
+      <div class="modal-title"><iconify-icon icon="mdi:ticket-outline" style="font-size:15px"></iconify-icon> 复用兑换码 · 春节直播专属</div>
+      <button class="modal-close" onclick="closeModal('modal-reusable-detail-1')" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:10px;display:flex;align-items:center;gap:5px"><iconify-icon icon="mdi:information-outline" style="font-size:14px"></iconify-icon> 活动信息</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:13px;margin-bottom:16px">
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">活动标题：</span><strong>春节直播专属</strong></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">兑换码口令：</span><code style="background:#f0f2f5;padding:1px 6px;border-radius:3px">SPRING2026</code></div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">渠道：</span>官方渠道</div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">版本：</span>2.5.0</div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">开始时间：</span><span style="font-variant-numeric:tabular-nums">2026-02-01 00:00</span></div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">结束时间：</span><span style="font-variant-numeric:tabular-nums">2026-02-28 23:59</span></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">可兑换次数上限：</span><strong>10,000</strong></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">预计生成价值：</span><strong>约 ¥500,000 元</strong></div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"></div>
+        <div style="padding:9px 12px;grid-column:1/-1;border-bottom:1px solid var(--border-light)">
+          <div style="color:var(--text-tertiary);font-size:12px;margin-bottom:6px">礼包配置：</div>
+          <table class="gift-table"><thead><tr><th>道具名称</th><th>数量</th><th>单价</th><th>小计</th></tr></thead><tbody><tr><td>金币</td><td>5,000</td><td>¥0.008</td><td>¥40.00</td></tr><tr><td>经验药水·大</td><td>10</td><td>¥1.00</td><td>¥10.00</td></tr></tbody></table>
+        </div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">单码价值：</span><span style="color:var(--error);font-weight:700">约 ¥50.00 元</span></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">用途：</span>免费活动 · 营销活动</div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">备注：</span>用于直播引流</div>
+        <div style="padding:9px 12px;grid-column:1/-1;background:var(--bg-secondary);border-bottom:1px solid var(--border-light);font-size:12px;color:var(--text-tertiary)">统计（仅查看）</div>
+        <div style="padding:9px 12px;grid-column:1/-1"><span style="color:var(--text-tertiary)">已兑换次数：</span><span style="color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums">6,823</span></div>
+      </div>
+      <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;display:flex;align-items:center;gap:5px"><iconify-icon icon="mdi:history" style="font-size:14px"></iconify-icon> 兑换日志（支持按角色 ID 筛选）</div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <input class="f-input" type="text" placeholder="输入角色 ID 筛选…" style="width:200px" />
+        <button class="btn btn-default" style="height:30px" onclick="toast('已筛选该角色兑换记录','info')">查询</button>
+      </div>
+      <div class="table-wrap" style="max-height:220px;overflow-y:auto">
+        <table>
+          <thead><tr><th>兑换码</th><th>状态</th><th>生成时间</th><th>生成人</th><th>激活角色 ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
+          <tbody>
+            <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2026-01-28 11:10:01</td><td>Jay.zhu</td><td class="td-mono">10234567</td><td>剑客无情</td><td>官方渠道</td><td class="td-muted">2026-02-10 09:15</td></tr>
+            <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2026-01-28 11:10:01</td><td>Jay.zhu</td><td class="td-mono">10298834</td><td>星辰若梦</td><td>飞书渠道</td><td class="td-muted">2026-02-12 16:42</td></tr>
+            <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2026-01-28 11:10:01</td><td>Jay.zhu</td><td class="td-mono">10301122</td><td>烈火骑士</td><td>官方渠道</td><td class="td-muted">2026-02-14 20:08</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)">
+        <span style="font-size:12px;color:var(--text-tertiary)">共 6,823 条，每页 10 条</span>
+        <div style="display:flex;align-items:center;gap:4px">
+          <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" disabled>‹</button>
+          <button class="btn btn-primary" style="padding:4px 10px;font-size:12px;min-width:0">1</button>
+          <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('第 2 页','info')">2</button>
+          <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('第 3 页','info')">3</button>
+          <span style="font-size:12px;color:var(--text-tertiary)">…</span>
+          <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('第 683 页','info')">683</button>
+          <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" onclick="toast('下一页','info')">›</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default" onclick="closeModal('modal-reusable-detail-1')">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL: 复用兑换码查询 · 活动详情2 ===== -->
+<div class="modal-overlay" id="modal-reusable-detail-2">
+  <div class="modal" style="width:840px;max-height:90vh">
+    <div class="modal-header">
+      <div class="modal-title"><iconify-icon icon="mdi:ticket-outline" style="font-size:15px"></iconify-icon> 复用兑换码 · 去年春节活动</div>
+      <button class="modal-close" onclick="closeModal('modal-reusable-detail-2')" aria-label="关闭"><iconify-icon icon="mdi:close"></iconify-icon></button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:10px;display:flex;align-items:center;gap:5px"><iconify-icon icon="mdi:information-outline" style="font-size:14px"></iconify-icon> 活动信息</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:13px;margin-bottom:16px">
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">活动标题：</span><strong>去年春节活动</strong></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">兑换码口令：</span><code style="background:#f0f2f5;padding:1px 6px;border-radius:3px">SPRING2026</code></div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">渠道：</span>官方渠道</div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">版本：</span>2.3.0</div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">开始时间：</span><span style="font-variant-numeric:tabular-nums">2025-01-20 00:00</span></div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">结束时间：</span><span style="font-variant-numeric:tabular-nums">2025-02-20 23:59</span></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">可兑换次数上限：</span><strong>15,000</strong></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">预计生成价值：</span><strong>约 ¥300,000 元</strong></div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"></div>
+        <div style="padding:9px 12px;grid-column:1/-1;border-bottom:1px solid var(--border-light)">
+          <div style="color:var(--text-tertiary);font-size:12px;margin-bottom:6px">礼包配置：</div>
+          <table class="gift-table"><thead><tr><th>道具名称</th><th>数量</th><th>单价</th><th>小计</th></tr></thead><tbody><tr><td>金币</td><td>2,000</td><td>¥0.008</td><td>¥16.00</td></tr><tr><td>新春礼盒</td><td>1</td><td>¥4.00</td><td>¥4.00</td></tr></tbody></table>
+        </div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">单码价值：</span><span style="color:var(--error);font-weight:700">约 ¥20.00 元</span></div>
+        <div style="padding:9px 12px;border-right:1px solid var(--border-light);border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">用途：</span>免费活动 · 节日礼包</div>
+        <div style="padding:9px 12px;border-bottom:1px solid var(--border-light)"><span style="color:var(--text-tertiary)">备注：</span>去年春节全服发放</div>
+        <div style="padding:9px 12px;grid-column:1/-1;background:var(--bg-secondary);border-bottom:1px solid var(--border-light);font-size:12px;color:var(--text-tertiary)">统计（仅查看）</div>
+        <div style="padding:9px 12px;grid-column:1/-1"><span style="color:var(--text-tertiary)">已兑换次数：</span><span style="color:var(--primary);font-weight:700;font-variant-numeric:tabular-nums">12,450</span></div>
+      </div>
+      <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;display:flex;align-items:center;gap:5px"><iconify-icon icon="mdi:history" style="font-size:14px"></iconify-icon> 兑换日志（支持按角色 ID 筛选）</div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <input class="f-input" type="text" placeholder="输入角色 ID 筛选…" style="width:200px" />
+        <button class="btn btn-default" style="height:30px" onclick="toast('已筛选该角色兑换记录','info')">查询</button>
+      </div>
+      <div class="table-wrap" style="max-height:220px;overflow-y:auto">
+        <table>
+          <thead><tr><th>兑换码</th><th>状态</th><th>生成时间</th><th>生成人</th><th>激活角色 ID</th><th>角色名</th><th>渠道</th><th>激活时间</th></tr></thead>
+          <tbody>
+            <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2025-01-10 15:00:00</td><td>Gali.hao</td><td class="td-mono">10100234</td><td>风之旅人</td><td>官方渠道</td><td class="td-muted">2025-01-22 10:30</td></tr>
+            <tr><td><code style="background:#f0f2f5;padding:1px 5px;border-radius:3px;font-size:12px">SPRING2026</code></td><td><span class="badge badge-approved"><span class="badge-dot"></span>已激活</span></td><td class="td-muted">2025-01-10 15:00:00</td><td>Gali.hao</td><td class="td-mono">10200456</td><td>寒冰剑侠</td><td>飞书渠道</td><td class="td-muted">2025-01-25 08:12</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)">
+        <span style="font-size:12px;color:var(--text-tertiary)">共 12,450 条，每页 10 条</span>
+        <div style="display:flex;align-items:center;gap:4px">
+          <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" disabled>‹</button>
+          <button class="btn btn-primary" style="padding:4px 10px;font-size:12px;min-width:0">1</button>
+          <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('第 2 页','info')">2</button>
+          <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('第 3 页','info')">3</button>
+          <span style="font-size:12px;color:var(--text-tertiary)">…</span>
+          <button class="btn btn-default" style="padding:4px 10px;font-size:12px;min-width:0" onclick="toast('第 1245 页','info')">1245</button>
+          <button class="btn btn-default" style="padding:4px 8px;font-size:12px;min-width:0" onclick="toast('下一页','info')">›</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default" onclick="closeModal('modal-reusable-detail-2')">关闭</button>
     </div>
   </div>
 </div>
